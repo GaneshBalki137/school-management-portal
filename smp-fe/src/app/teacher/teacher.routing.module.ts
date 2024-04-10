@@ -8,7 +8,7 @@ const routes:Routes=[
     {path:'teacher',component:TeacherHomeComponent,
                     children:[
                         {path:'dashboard',component:TeacherDashboardComponent},
-                        {path:'student/attendence',component:TeacherAttendenceComponent}
+                        {path:'student/mark/attendence',component:TeacherAttendenceComponent}
                     ]
     }
 ]
