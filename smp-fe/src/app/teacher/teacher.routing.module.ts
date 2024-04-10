@@ -7,6 +7,7 @@ import { TeacherAttendenceComponent } from "./teacher-home/teacher-attendence/te
 const routes:Routes=[
     {path:'teacher',component:TeacherHomeComponent,
                     children:[
+                        {path:'',component:TeacherDashboardComponent},
                         {path:'dashboard',component:TeacherDashboardComponent},
                         {path:'student/mark/attendence',component:TeacherAttendenceComponent}
                     ]

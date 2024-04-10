@@ -13,7 +13,7 @@ export class LogInService implements OnInit {
 
     username : string 
     password : string 
-    isLoggedIn: boolean 
+    isLoggedIn: boolean=false;
     constructor(){
         this.username = ''
         this.password = ''
