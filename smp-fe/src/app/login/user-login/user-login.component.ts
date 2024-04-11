@@ -22,40 +22,40 @@ async handleSubmit(): Promise<void> {
   console.log(this.login_id);
   console.log(this.password);
   this.loading=true;
-  if (this.role=='teacher'){
-              this.router.navigate(['/teacher']);
-             }
+  // if (this.role=='teacher'){
+  //             this.router.navigate(['/teacher']);
+  //            }
 
-//   try {
-//     await this.authService.userlogin(this.login_id, this.password).subscribe({
-//       next: (data:any) => {
-//         console.log(data);
-//         this.loginService.user=data.user;
-//         this.loginService.username=data.user.login_id;
-//         localStorage.setItem('user', JSON.stringify(data.user));
-//         this.loading=false;
-//         if (data.user.role=='admin'){
-//           this.router.navigate(['/admin/dashboard']);
-//         }
-//         else if(data.user.role=='teacher'){
-//           this.router.navigate(['/teacher/dashboard']);
-//         }else if(data.user.role=='student'){
-//           this.router.navigate(['/student/dashboard']);
-//         }else{
-//           this.router.navigate(['/not-found']);
-//         }
-//       },
-//       error: (err) => {
-//         console.log(err);
-//         this.loading=false;
-//       }
-//     })
+  try {
+    await this.authService.userlogin(this.login_id, this.password).subscribe({
+      next: (data:any) => {
+        console.log(data);
+        // this.loginService.user=data.user;
+        // this.loginService.username=data.user.login_id;
+        // localStorage.setItem('user', JSON.stringify(data.user));
+        // this.loading=false;
+        // if (data.user.role=='admin'){
+        //   this.router.navigate(['/admin/dashboard']);
+        // }
+        // else if(data.user.role=='teacher'){
+        //   this.router.navigate(['/teacher/dashboard']);
+        // }else if(data.user.role=='student'){
+        //   this.router.navigate(['/student/dashboard']);
+        // }else{
+        //   this.router.navigate(['/not-found']);
+        // }
+      },
+      error: (err) => {
+        console.log(err);
+        this.loading=false;
+      }
+    })
     
-//   }catch(err){
-//     console.error(err);
-//     alert('Login Failed');
-//   }finally {
-//     this.loading=false;
-//   }
+  }catch(err){
+    console.error(err);
+    alert('Login Failed');
+  }finally {
+    this.loading=false;
+  }
  }
 }
