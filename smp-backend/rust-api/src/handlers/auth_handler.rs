@@ -4,14 +4,14 @@ use jsonwebtoken::{encode, Header, EncodingKey};
 use std::time::{SystemTime, UNIX_EPOCH};
 use tokio_postgres::{Client, NoTls, Error};
 //added to handle error in generate_token()
-use axum::{Error as AxumError};
-use axum::{
-    body::Bytes,
-    body::Full,
-    http::{Response, StatusCode},
-};
-use std::convert::Infallible;
-use serde_json;
+// use axum::{Error as AxumError};
+// use axum::{
+//     body::Bytes,
+//     body::Full,
+//     http::{Response, StatusCode},
+// };
+// use std::convert::Infallible;
+// use serde_json;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Claims {
