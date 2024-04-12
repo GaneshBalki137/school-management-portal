@@ -1,0 +1,10 @@
+/Users/apple/SMP(project)/school-management-portal/smp-backend/rust-api/target/debug/deps/libsqlformat-808b1e1acd4bb87e.rmeta: /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlformat-0.2.3/src/lib.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlformat-0.2.3/src/formatter.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlformat-0.2.3/src/indentation.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlformat-0.2.3/src/inline_block.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlformat-0.2.3/src/params.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlformat-0.2.3/src/tokenizer.rs
+
+/Users/apple/SMP(project)/school-management-portal/smp-backend/rust-api/target/debug/deps/sqlformat-808b1e1acd4bb87e.d: /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlformat-0.2.3/src/lib.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlformat-0.2.3/src/formatter.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlformat-0.2.3/src/indentation.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlformat-0.2.3/src/inline_block.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlformat-0.2.3/src/params.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlformat-0.2.3/src/tokenizer.rs
+
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlformat-0.2.3/src/lib.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlformat-0.2.3/src/formatter.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlformat-0.2.3/src/indentation.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlformat-0.2.3/src/inline_block.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlformat-0.2.3/src/params.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlformat-0.2.3/src/tokenizer.rs:

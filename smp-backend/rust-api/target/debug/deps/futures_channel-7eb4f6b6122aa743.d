@@ -1,0 +1,9 @@
+/Users/apple/SMP(project)/school-management-portal/smp-backend/rust-api/target/debug/deps/libfutures_channel-7eb4f6b6122aa743.rmeta: /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-channel-0.3.30/src/lib.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-channel-0.3.30/src/lock.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-channel-0.3.30/src/mpsc/mod.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-channel-0.3.30/src/mpsc/queue.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-channel-0.3.30/src/oneshot.rs
+
+/Users/apple/SMP(project)/school-management-portal/smp-backend/rust-api/target/debug/deps/futures_channel-7eb4f6b6122aa743.d: /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-channel-0.3.30/src/lib.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-channel-0.3.30/src/lock.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-channel-0.3.30/src/mpsc/mod.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-channel-0.3.30/src/mpsc/queue.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-channel-0.3.30/src/oneshot.rs
+
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-channel-0.3.30/src/lib.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-channel-0.3.30/src/lock.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-channel-0.3.30/src/mpsc/mod.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-channel-0.3.30/src/mpsc/queue.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-channel-0.3.30/src/oneshot.rs:

@@ -1,17 +1,111 @@
-use axum::{extract::Json, response::Json as JsonResponse, response::IntoResponse};
+// use actix_web::{web, HttpResponse, Responder, Error};
+// use serde::{Deserialize, Serialize};
+// use jsonwebtoken::{encode, Header, EncodingKey};
+// use std::time::{SystemTime, UNIX_EPOCH};
+// use sqlx::{PgPool, Pool, Postgres,PgConnection};
+// use actix_web::error::ResponseError;
+// use sqlx::Row;
+
+// #[derive(Debug, Serialize, Deserialize)]
+// pub struct Claims {
+//     pub sub: String,
+//     pub role: String,
+//     pub exp: usize,
+// }
+
+// #[derive(Debug, Serialize, Deserialize)]
+// pub struct LoginRequest {
+//     pub login_id: String,
+//     pub password: String,
+// }
+
+// #[derive(Debug, Serialize, Deserialize)]
+// pub struct LoginResponse {
+//     pub token: String,
+// }
+
+// #[derive(Debug, Serialize, Deserialize)]
+// pub struct UserCredentials {
+//     pub login_id: String,
+//     pub password: String,
+//     pub role: String,
+// }
+
+// fn generate_token(login_id: &str, role: &str) -> Result<String, String> {
+//     let expiration = SystemTime::now()
+//         .duration_since(UNIX_EPOCH)
+//         .unwrap()
+//         .as_secs()
+//         + 3600; // Token expires in 1 hour
+//     let claims = Claims {
+//         sub: login_id.to_owned(),
+//         role: role.to_owned(),
+//         exp: expiration as usize,
+//     };
+
+//     let secret_key = "your_secret_key";
+//     let encoding_key = EncodingKey::from_secret(secret_key.as_bytes());
+
+//     encode(&Header::default(), &claims, &encoding_key)
+//         .map_err(|_| "Failed to generate token".to_owned())
+// }
+
+
+
+
+// pub async fn login(login_info: web::Json<LoginRequest>) -> impl Responder {
+//     match establish_connection().await {
+//         Ok(pool) => {
+//             match pool.acquire().await {
+//                 Ok(mut client) => {
+//                     match sqlx::query("SELECT * FROM login WHERE login_id = $1 and password = $2")
+//                         .bind(&login_info.login_id)
+//                         .bind(&login_info.password)
+//                         .fetch_one(&mut client)
+//                         .await
+//                     {
+//                         Ok(row) => {
+//                             let user = UserCredentials {
+//                                 login_id: row.get(0),
+//                                 password: row.get(1),
+//                                 role: row.get(2),
+//                             };
+
+//                             match generate_token(&login_info.login_id, &user.role) {
+//                                 Ok(token) => HttpResponse::Ok().json(LoginResponse { token }),
+//                                 Err(_) => HttpResponse::InternalServerError().json(LoginResponse { token: "Failed to generate token".to_owned() }),
+//                             }
+//                         }
+//                         _ => HttpResponse::NotFound().json(LoginResponse { token: "User not found".to_owned() }),
+//                     }
+//                 }
+//                 Err(_) => HttpResponse::InternalServerError().json(LoginResponse { token: "Failed to acquire connection from pool".to_owned() }),
+//             }
+//         }
+//         Err(_) => HttpResponse::InternalServerError().json(LoginResponse { token: "Internal server error".to_owned() }),
+//     }
+// }
+
+
+// pub async fn establish_connection() -> Result<PgPool, Error> {
+//     let db_url = "postgres://postgres:ganesh@localhost/demo";
+//     let pool = PgPool::connect(db_url).await.map_err(|err| {
+//         actix_web::error::ErrorInternalServerError(err)
+//     })?;
+
+//     Ok(pool)
+// }
+
+
+// use actix_web::{web, HttpResponse, Responder, Error, http::Cookie};
+use actix_web::{web, HttpResponse, Responder, Error};
+use actix_web::cookie::Cookie;
+
 use serde::{Deserialize, Serialize};
 use jsonwebtoken::{encode, Header, EncodingKey};
 use std::time::{SystemTime, UNIX_EPOCH};
-use tokio_postgres::{Client, NoTls, Error};
-//added to handle error in generate_token()
-// use axum::{Error as AxumError};
-// use axum::{
-//     body::Bytes,
-//     body::Full,
-//     http::{Response, StatusCode},
-// };
-// use std::convert::Infallible;
-// use serde_json;
+use sqlx::{PgPool};
+use sqlx::Row;
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Claims {
@@ -53,47 +147,58 @@ fn generate_token(login_id: &str, role: &str) -> Result<String, String> {
     let secret_key = "your_secret_key";
     let encoding_key = EncodingKey::from_secret(secret_key.as_bytes());
 
-    // encode(&Header::default(), &claims, &encoding_key)
-    // .map_err(|_| axum::Error::new("Failed to generate token"))
     encode(&Header::default(), &claims, &encoding_key)
         .map_err(|_| "Failed to generate token".to_owned())
-    
 }
 
-pub async fn login(Json(login_info): Json<LoginRequest>) -> impl IntoResponse {
-    const NOT_FOUND: &str = "HTTP/1.1 404 NOT FOUND\r\n\r\n";
-    const INTERNAL_SERVER_ERROR: &str = "HTTP/1.1 500 INTERNAL SERVER ERROR\r\n\r\n";
-
+pub async fn login(login_info: web::Json<LoginRequest>) -> impl Responder {
     match establish_connection().await {
-        Ok(client) => {
-            match client.query_one("SELECT * FROM login WHERE login_id = $1 and password = $2", &[&login_info.login_id,&login_info.password]).await {
-                Ok(row) => {
-                    let user = UserCredentials {
-                        login_id: row.get(0),
-                        password: row.get(1),
-                        role: row.get(2),
-                    };
+        Ok(pool) => {
+            match pool.acquire().await {
+                Ok(mut client) => {
+                    match sqlx::query("SELECT * FROM login WHERE login_id = $1 and password = $2")
+                        .bind(&login_info.login_id)
+                        .bind(&login_info.password)
+                        .fetch_one(&mut client)
+                        .await
+                    {
+                        Ok(row) => {
+                            let user = UserCredentials {
+                                login_id: row.get(0),
+                                password: row.get(1),
+                                role: row.get(2),
+                            };
 
-                    match generate_token(&login_info.login_id, &user.role) {
-                        Ok(token) => JsonResponse(LoginResponse { token }),
-                        Err(_) => JsonResponse(LoginResponse { token: "Failed to generate token".to_owned() }),
+                            match generate_token(&login_info.login_id, &user.role) {
+                                Ok(token) => {
+                                    // Create cookie containing login ID and role
+                                    let cookie = Cookie::build("authorization", format!("{}:{}", user.login_id, user.role))
+                                        .http_only(true)
+                                        .finish();
+
+                                    // Create HTTP response with cookie and token in JSON body
+                                    HttpResponse::Ok()
+                                        .cookie(cookie)
+                                        .json(LoginResponse { token })
+                                },
+                                Err(_) => HttpResponse::InternalServerError().json(LoginResponse { token: "Failed to generate token".to_owned() }),
+                            }
+                        },
+                        _ => HttpResponse::NotFound().json(LoginResponse { token: "User not found".to_owned() }),
                     }
-                }
-                _ => JsonResponse(LoginResponse { token: "User not found".to_owned() }),
+                },
+                Err(_) => HttpResponse::InternalServerError().json(LoginResponse { token: "Failed to acquire connection from pool".to_owned() }),
             }
-        }
-        Err(_) => JsonResponse(LoginResponse { token: "Internal server error".to_owned() }),
+        },
+        Err(_) => HttpResponse::InternalServerError().json(LoginResponse { token: "Internal server error".to_owned() }),
     }
 }
 
-async fn establish_connection() -> Result<Client, Error> {
-    let (client, connection) = tokio_postgres::connect("host=localhost user=postgres dbname=demo password=hash", NoTls).await?;
+pub async fn establish_connection() -> Result<PgPool, Error> {
+    let db_url = "postgres://postgres:ganesh@localhost/demo";
+    let pool = PgPool::connect(db_url).await.map_err(|err| {
+        actix_web::error::ErrorInternalServerError(err)
+    })?;
 
-    tokio::spawn(async move {
-        if let Err(e) = connection.await {
-            eprintln!("Connection error: {}", e);
-        }
-    });
-
-    Ok(client)
+    Ok(pool)
 }

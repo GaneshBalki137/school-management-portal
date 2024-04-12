@@ -1,0 +1,1 @@
+RouteFuture<axum::handler::OnMethod<fn(axum::Json<LoginRequest>) -> impl std::future::Future<Output = impl IntoResponse> {login}, axum::body::Body, (axum::Json<LoginRequest>,), EmptyRouter>, axum::routing::Layered<Cors<EmptyRouter<_>>>, axum::body::Body>

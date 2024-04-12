@@ -1,0 +1,11 @@
+/Users/apple/SMP(project)/school-management-portal/smp-backend/rust-api/target/debug/deps/libmatchit-c816902df6f1f02f.rmeta: /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/matchit-0.5.0/src/lib.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/matchit-0.5.0/src/error.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/matchit-0.5.0/src/params.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/matchit-0.5.0/src/router.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/matchit-0.5.0/src/tree.rs
+
+/Users/apple/SMP(project)/school-management-portal/smp-backend/rust-api/target/debug/deps/libmatchit-c816902df6f1f02f.rlib: /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/matchit-0.5.0/src/lib.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/matchit-0.5.0/src/error.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/matchit-0.5.0/src/params.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/matchit-0.5.0/src/router.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/matchit-0.5.0/src/tree.rs
+
+/Users/apple/SMP(project)/school-management-portal/smp-backend/rust-api/target/debug/deps/matchit-c816902df6f1f02f.d: /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/matchit-0.5.0/src/lib.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/matchit-0.5.0/src/error.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/matchit-0.5.0/src/params.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/matchit-0.5.0/src/router.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/matchit-0.5.0/src/tree.rs
+
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/matchit-0.5.0/src/lib.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/matchit-0.5.0/src/error.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/matchit-0.5.0/src/params.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/matchit-0.5.0/src/router.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/matchit-0.5.0/src/tree.rs:

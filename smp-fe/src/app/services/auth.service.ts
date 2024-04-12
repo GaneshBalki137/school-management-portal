@@ -12,6 +12,6 @@ export class AuthService {
   constructor(private http: HttpClient, private cookieService: CookieService,private router: Router,private loginService:LogInService){}
   
   userlogin(login_id: string, password: string){
-        return this.http.post('http://localhost:8000/api/login', {login_id: login_id, password: password},{withCredentials: true})
+        return this.http.post('http://localhost:3000/login', {login_id: login_id, password: password},{withCredentials: true})
   }
 }

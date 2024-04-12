@@ -1,0 +1,11 @@
+/Users/apple/SMP(project)/school-management-portal/smp-backend/rust-api/target/debug/deps/libsqlx-fae65bd57813acfe.rmeta: /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlx-0.7.4/src/lib.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlx-0.7.4/src/any/mod.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlx-0.7.4/src/macros/mod.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlx-0.7.4/src/ty_match.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlx-0.7.4/src/lib.md /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlx-0.7.4/src/macros/test.md /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlx-0.7.4/src/any/install_drivers_note.md
+
+/Users/apple/SMP(project)/school-management-portal/smp-backend/rust-api/target/debug/deps/sqlx-fae65bd57813acfe.d: /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlx-0.7.4/src/lib.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlx-0.7.4/src/any/mod.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlx-0.7.4/src/macros/mod.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlx-0.7.4/src/ty_match.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlx-0.7.4/src/lib.md /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlx-0.7.4/src/macros/test.md /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlx-0.7.4/src/any/install_drivers_note.md
+
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlx-0.7.4/src/lib.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlx-0.7.4/src/any/mod.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlx-0.7.4/src/macros/mod.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlx-0.7.4/src/ty_match.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlx-0.7.4/src/lib.md:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlx-0.7.4/src/macros/test.md:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/sqlx-0.7.4/src/any/install_drivers_note.md:
