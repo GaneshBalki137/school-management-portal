@@ -10,7 +10,7 @@ use sqlx::PgPool;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    let pool = PgPool::connect("postgres://postgres:ganesh@localhost/demo").await.unwrap();
+    let pool = PgPool::connect("postgres://postgres:hash@localhost/smp_db").await.unwrap();
 
     HttpServer::new(move || {
         let cors = Cors::default()
