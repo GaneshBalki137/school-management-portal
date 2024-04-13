@@ -1,4 +1,4 @@
-struct Grade {
+pub struct Grade {
     grade_id: u32,  // Primary key
     score: u32,
     semester: u32,
