@@ -7,9 +7,9 @@ mod handlers;
 use crate::handlers::auth_handler::{login, establish_connection};
 // Adjust this path based on your project structure
 use sqlx::PgPool;
-use crate::handlers::admin::{add_student,get_all_students,update_student,delete_student};
+use crate::handlers::admin::{add_student,get_all_students,update_student,delete_student,
+                             add_teacher,get_all_teachers,update_teacher,delete_teacher};
 mod models;
-//add_teacher,get_all_teachers,update_teacher,delete_teacher
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -32,10 +32,10 @@ async fn main() -> std::io::Result<()> {
             .service(web::resource("/get_all_students").route(web::get().to(get_all_students)))
             .service(web::resource("/update_student/{student_id}").route(web::put().to(update_student)))
             .service(web::resource("/delete_student/{student_id}").route(web::delete().to(delete_student)))
-            // .service(web::resource("/add_teacher").route(web::post().to(add_teacher)))
-            // .service(web::resource("/get_all_teachers").route(web::get().to(get_all_teachers)))
-            // .service(web::resource("/update_teacher/{teacher_id}").route(web::put().to(update_teacher)))
-            // .service(web::resource("/delete_teacher/{teacher_id}").route(web::delete().to(delete_teacher)))
+            .service(web::resource("/add_teacher").route(web::post().to(add_teacher)))
+            .service(web::resource("/get_all_teachers").route(web::get().to(get_all_teachers)))
+            .service(web::resource("/update_teacher/{teacher_id}").route(web::put().to(update_teacher)))
+            .service(web::resource("/delete_teacher/{teacher_id}").route(web::delete().to(delete_teacher)))
     })
     .bind("127.0.0.1:3000")?
     .run()
