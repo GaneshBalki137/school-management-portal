@@ -106,3 +106,72 @@ pub async fn delete_student(path: web::Path<i32>, pool: web::Data<PgPool>, ) -> 
     }
 }
 
+pub async fn add_teacher(teacher: web::Json<Teacher>,pool: web::Data<PgPool>) -> impl Responder{
+    let teacher = teacher.into_inner();
+    let result = sqlx::query_as::<_, Teacher>(
+        "INSERT INTO teachers (first_name, last_name, date_of_birth, gender, address, phone_number, email, qualification,hire_date,subject_name) 
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING teacher_id",
+    )
+    .bind(teacher.first_name)
+    .bind(teacher.last_name)
+    .bind(teacher.date_of_birth)
+    .bind(teacher.gender)
+    .bind(teacher.address)
+    .bind(teacher.phone_number)
+    .bind(teacher.email)
+    .bind(teacher.qualification)
+    .bind(teacher.hire_date)
+    .bind(teacher.subject_name)
+    .fetch_one(pool.get_ref())
+    .await;
+
+    match result {
+        Ok(inserted_teacher) => HttpResponse::Ok().body(inserted_teacher.teacher_id.to_string()),
+        Err(_) => HttpResponse::InternalServerError().finish(),
+    }
+}
+
+pub async fn get_all_teachers(pool: web::Data<PgPool>) -> impl Responder {
+    let result = sqlx::query_as::<_, Teacher>("SELECT * FROM teachers")
+        .fetch_all(pool.get_ref())
+        .await;
+
+    match result {
+        Ok(teachers) => HttpResponse::Ok().json(teachers),
+        Err(_) => HttpResponse::InternalServerError().finish(),
+    }
+}
+
+pub async fn update_teacher(teacher: web::Json<Teacher>, pool: web::Data<PgPool>) -> impl Responder {
+    let teacher = teacher.into_inner();
+    let result = sqlx::query_as::<_, Teacher>(
+        "UPDATE teachers SET address = $1, phone_number = $2, email = $3, qualification = $4, subject_name = $5 WHERE teacher_id = $6 RETURNING *",
+    )
+    .bind(teacher.address)
+    .bind(teacher.phone_number)
+    .bind(teacher.email)
+    .bind(teacher.qualification)
+    .bind(teacher.subject_name)
+    .bind(teacher.teacher_id)
+    .fetch_one(pool.get_ref())
+    .await;
+
+    match result {
+        Ok(updated_teacher) => HttpResponse::Ok().json(updated_teacher),
+        Err(_) => HttpResponse::InternalServerError().finish(),
+    }
+}
+
+pub async fn delete_teacher(path: web::Path<i32>, pool: web::Data<PgPool>) -> impl Responder{
+    let teacher_id = path.into_inner();
+    let result = sqlx::query!(
+        "DELETE FROM teachers WHERE teacher_id= $1", teacher_id
+    )
+    .execute(pool.get_ref())
+    .await;
+
+    match result {
+        Ok(_) => HttpResponse::Ok().body("Teacher Deleted Successfully"),
+        Err(_) => HttpResponse::InternalServerError().finish(),
+    }
+}
