@@ -6,10 +6,11 @@
 
 /* Custom CSS for content header */
 .content-header {
-  background-color: #007bff;
+  /* background-color: #007bff; */
+  background-color: #357d95;
   color: #ffffff;
   padding: 20px;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 
 
@@ -77,7 +78,8 @@
 
 /* Custom CSS for active link */
 .nav-link.active {
-  background-color: #007bff;
+  /* background-color: #007bff; */
+    background-color: #01b3ef;
   color: #ffffff;
 }
 
