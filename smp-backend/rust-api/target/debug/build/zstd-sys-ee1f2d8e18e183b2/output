@@ -2415,6 +2415,6 @@ HOST_ARFLAGS = None
 cargo:rerun-if-env-changed=ARFLAGS
 ARFLAGS = None
 cargo:rustc-link-lib=static=zstd
-cargo:rustc-link-search=native=/Users/apple/Desktop/smp/school-management-portal/smp-backend/rust-api/target/debug/build/zstd-sys-ee1f2d8e18e183b2/out
-cargo:root=/Users/apple/Desktop/smp/school-management-portal/smp-backend/rust-api/target/debug/build/zstd-sys-ee1f2d8e18e183b2/out
+cargo:rustc-link-search=native=/Users/apple/Desktop/smp project/school-management-portal/smp-backend/rust-api/target/debug/build/zstd-sys-ee1f2d8e18e183b2/out
+cargo:root=/Users/apple/Desktop/smp project/school-management-portal/smp-backend/rust-api/target/debug/build/zstd-sys-ee1f2d8e18e183b2/out
 cargo:include=/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zstd-sys-2.0.10+zstd.1.5.6/zstd/lib

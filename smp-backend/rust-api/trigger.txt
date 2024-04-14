@@ -1,0 +1,14 @@
+CREATE OR REPLACE FUNCTION insert_login_from_students()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO login (login_id, password, role)
+    VALUES (NEW.email, NEW.date_of_birth, 'student');
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Create the trigger
+CREATE TRIGGER insert_login_trigger
+AFTER INSERT ON students
+FOR EACH ROW
+EXECUTE FUNCTION insert_login_from_students();
