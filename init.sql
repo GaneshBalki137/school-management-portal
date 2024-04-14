@@ -73,8 +73,7 @@ CREATE TABLE public.Timetable (
 );
 
 CREATE TABLE public.Login (
-    login_id SERIAL PRIMARY KEY,
-    username VARCHAR(50),
+    login_id VARCHAR(50) PRIMARY KEY,
     password VARCHAR(100),
     role VARCHAR(20)
 );
