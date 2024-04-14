@@ -1,0 +1,1 @@
+&<impl ServiceFactory<ServiceRequest, Config = (), Response = ServiceResponse<actix_web::middleware::logger::StreamLog<EitherBody<BoxBody>>>, Error = actix_web::Error, InitError = ()> as ServiceFactory<ServiceRequest>>::Service

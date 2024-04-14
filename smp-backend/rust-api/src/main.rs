@@ -14,7 +14,7 @@ mod models;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    let pool = PgPool::connect("postgres://postgres:hash@localhost/smp_db").await.unwrap();
+    let pool = PgPool::connect("postgres://postgres:hash@localhost/demo").await.unwrap();
 
     HttpServer::new(move || {
         let cors = Cors::default()
