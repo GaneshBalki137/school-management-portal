@@ -8,11 +8,15 @@ import { AuthService } from './services/auth.service';
 import { LogInService } from './services/login.service';
 import { AdminModule } from './admin/admin.module';
 import { TeacherModule } from './teacher/teacher.module';
+import { DropdownModule } from './shared/dropdown.module';
+import { NoticeComponent } from './notice/notice.component';
+import { StudentService } from './services/student.service';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NoticeComponent,
   ],
   imports: [
     
@@ -20,10 +24,11 @@ import { TeacherModule } from './teacher/teacher.module';
     AppRoutingModule,
     LoginModule,
     AdminModule,
-    TeacherModule
+    TeacherModule,
+    DropdownModule
   ],
   providers: [
-    AuthService,LogInService
+    AuthService,LogInService,StudentService
   ],
   bootstrap: [AppComponent]
 })

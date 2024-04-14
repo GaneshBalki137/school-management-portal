@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { LogInService } from '../../services/login.service';
@@ -8,54 +8,53 @@ import { LogInService } from '../../services/login.service';
   templateUrl: './user-login.component.html',
   styleUrl: './user-login.component.css'
 })
+
 export class UserLoginComponent implements OnInit {
-login_id: string;
-password: string;
-loading:boolean=false;
-role:string='teacher'
-ngOnInit(): void {}
+  login_id: string;
+  password: string;
+  loading: boolean = false;
+  role: string = '';
 
-constructor(private authService:AuthService,private router:Router,private loginService:LogInService) { }
+  session_login_id: string;
+  session_role: string;
 
+  errorMessage: string = '';
+  showPassword: boolean = false;
 
-async handleSubmit(): Promise<void> {
-  console.log(this.login_id);
-  console.log(this.password);
-  this.loading=true;
-  // if (this.role=='teacher'){
-  //             this.router.navigate(['/teacher']);
-  //            }
+  constructor(private authService: AuthService, private router: Router, private loginService: LogInService) { }
 
-  try {
-    await this.authService.userlogin(this.login_id, this.password).subscribe({
-      next: (data:any) => {
-        console.log(data);
-        // this.loginService.user=data.user;
-        // this.loginService.username=data.user.login_id;
-        // localStorage.setItem('user', JSON.stringify(data.user));
-        // this.loading=false;
-        // if (data.user.role=='admin'){
-        //   this.router.navigate(['/admin/dashboard']);
-        // }
-        // else if(data.user.role=='teacher'){
-        //   this.router.navigate(['/teacher/dashboard']);
-        // }else if(data.user.role=='student'){
-        //   this.router.navigate(['/student/dashboard']);
-        // }else{
-        //   this.router.navigate(['/not-found']);
-        // }
-      },
-      error: (err) => {
-        console.log(err);
-        this.loading=false;
-      }
-    })
-    
-  }catch(err){
-    console.error(err);
-    alert('Login Failed');
-  }finally {
-    this.loading=false;
+  ngOnInit(): void {
+    if (this.authService.isLoggedIn()) {
+      const role = this.authService.getUserRole();
+      this.authService.redirectBasedOnRole(role)
+    } else {
+      //console.log(this.authService.getUserRole()+" :-> No one is Logged in")
+      console.log("In Login Component and No one is Logged in")
+    }
   }
- }
+
+  async handleSubmit(): Promise<void> {
+    this.loading = true;
+
+    try {
+      const data: any = await this.authService.userlogin(this.login_id, this.password).toPromise();
+      const token = data.token;
+      const jwtPayload = this.authService.decodeToken(token);
+
+      const role = jwtPayload.role;
+      this.authService.storeToken(token, jwtPayload.sub, role);
+      this.authService.redirectBasedOnRole(role);
+    } catch (error) {
+      console.error(error);
+      this.errorMessage = 'Invalid username or password';
+      // Handle login error
+      //alert('Login Failed');
+    } finally {
+      this.loading = false;
+    }
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
 }
