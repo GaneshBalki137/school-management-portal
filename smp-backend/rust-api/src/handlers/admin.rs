@@ -24,33 +24,14 @@ pub async fn add_student(student: web::Json<Student>, pool: web::Data<PgPool>) -
     .await;
     
     match result {
-        Ok(inserted_student) => {
-           //add login
-           let password: String = match inserted_student.last_name {
-            Some(last_name) => {
-                // Concatenate strings if last_name is Some(String)
-                let student_id = inserted_student.student_id.to_string();
-                let class_id = inserted_student.class_id.to_string(); // Convert Option<i32> to String
-                format!("{}@{}{}", last_name, student_id, class_id)
-            }
-            None => {
-                // Handle the case where last_name is None
-                // For example, provide a default password
-                "default_password".to_string()
-            }
-        };
-            let mut role = String::from("student");
-
-            sqlx::query_as::<_, Student>("INSERT INTO login (username,password,role) VALUES ($1,$2,$3)",)
-                .bind(inserted_student.email)
-                .bind(password)
-                .bind(role)
-                .fetch_one(pool.get_ref())
-                 .await;
-            HttpResponse::Ok().body(inserted_student.student_id.to_string())
-        },
-        Err(_) => HttpResponse::InternalServerError().finish(),
+        Ok(inserted_student) => HttpResponse::Ok().body(inserted_student.student_id.to_string()),
+        Err(e) => {
+            eprintln!("Error inserting student: {:?}", e);
+            HttpResponse::InternalServerError().finish()
+        }
+        
     }
+    
 }
 
 pub async fn get_all_students(pool: web::Data<PgPool>) -> impl Responder {
@@ -175,3 +156,31 @@ pub async fn delete_teacher(path: web::Path<i32>, pool: web::Data<PgPool>) -> im
         Err(_) => HttpResponse::InternalServerError().finish(),
     }
 }
+
+
+
+// match result {
+//     Ok(inserted_student) => {
+//        //add login
+//        let password: String = match inserted_student.last_name {
+//         Some(last_name) => {
+//             let student_id = inserted_student.student_id.to_string();
+//             let class_id = inserted_student.class_id.to_string(); // Convert Option<i32> to String
+//             format!("{}@{}{}", last_name, student_id, class_id)
+//         }
+//         None => {
+//             "default_password".to_string()
+//         }
+//     };
+//         let mut role = String::from("student");
+
+//         sqlx::query_as::<_, Student>("INSERT INTO login (login_id,password,role) VALUES ($1,$2,$3)",)
+//             .bind(inserted_student.email)
+//             .bind(password)
+//             .bind(role)
+//             .fetch_one(pool.get_ref())
+//              .await;
+//         HttpResponse::Ok().body(inserted_student.student_id.to_string())
+//     },
+//     Err(_) => HttpResponse::InternalServerError().finish(),
+// }

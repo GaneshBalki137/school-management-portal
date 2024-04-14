@@ -10,6 +10,7 @@ import { AdminModule } from './admin/admin.module';
 import { TeacherModule } from './teacher/teacher.module';
 import { DropdownModule } from './shared/dropdown.module';
 import { NoticeComponent } from './notice/notice.component';
+import { StudentService } from './services/student.service';
 
 
 @NgModule({
@@ -27,7 +28,7 @@ import { NoticeComponent } from './notice/notice.component';
     DropdownModule
   ],
   providers: [
-    AuthService,LogInService
+    AuthService,LogInService,StudentService
   ],
   bootstrap: [AppComponent]
 })

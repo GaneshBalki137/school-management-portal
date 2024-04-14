@@ -195,11 +195,7 @@ pub async fn login(login_info: web::Json<LoginRequest>) -> impl Responder {
 }
 
 pub async fn establish_connection() -> Result<PgPool, Error> {
-<<<<<<< HEAD
     let db_url = "postgres://postgres:hash@localhost/smp_db";
-=======
-    let db_url = "postgres://postgres:hash@localhost/demo";
->>>>>>> origin/ganesh
     let pool = PgPool::connect(db_url).await.map_err(|err| {
         actix_web::error::ErrorInternalServerError(err)
     })?;

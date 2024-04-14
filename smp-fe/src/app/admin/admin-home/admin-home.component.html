@@ -1,23 +1,117 @@
-<div class="conatiner-fluid">
-    <div class="row">
-        <div class="d-flex flex-column justify-content-between col-auto bg-dark min-vh-100">
-            <div>
-                <a href="" class="text-white text-decoration-none d-flex align-items-center ms-4" >
-                    <span class="fs-5">Admin Name</span>
-                </a>
-                <ul class="nav nav-pills flex-column">
-                    <li class="nav-item"><a href="" class="nav-link active">Active</a></li>
-                    <li class="nav-item"><a href="" class="nav-link active">Link</a></li>
-                    <li class="nav-item"><a href="" class="nav-link active">Disabled </a></li>
-                </ul>
 
-            </div>
-
-        </div>
-       
-            <router-outlet></router-outlet>
+    <!-- Hamburger Icon for toggling sidebar -->
+    <div class="toggle-btn" id="sidebar-toggle" (click)="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+      </div>
+  
+    <!-- Sidebar for Large Screens -->
+    <div class="sidebar d-none d-lg-block">
+      <nav>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <hr class="divider">
+            <a class="nav-link" routerLink="dashboard" routerLinkActive="active">
+              <i class="fas fa-home"></i>  Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <hr class="divider">
+            <a class="nav-link" routerLink="students" routerLinkActive="active">
+                <i class="fas fa-user-graduate"></i>  Students 
+            </a>
+          </li>
+          <li class="nav-item">
+            <hr class="divider">
+            <a class="nav-link" routerLink="teachers" routerLinkActive="active">
+                <i class="fas fa-chalkboard-teacher"></i> Teachers
+            </a>
+          </li>
+          <li class="nav-item">
+            <hr class="divider">
+            <a class="nav-link" routerLink="students/add/grades" routerLinkActive="active">
+              <i class="fas fa-calendar"></i> Schedule
+            </a>
+          </li>
+          <li class="nav-item">
+            <hr class="divider">
+            <a class="nav-link" routerLink="official/main/notice-board" routerLinkActive="active">
+              <i class="fas fa-bullhorn"></i> Notice Board
+            </a>
+          </li>
+          <li class="nav-item">
+            <hr class="divider">
+            <a class="nav-link" routerLink="students/attendance" (click)="handleLogOut()">
+              <i class="fas fa-sign-out-alt "></i> Logout
+            </a>
+            <hr class="divider">
+          </li>
+        </ul>
         
+      </nav>
+  
+      
+    </div>
+  
+    <!-- Sidebar for Small Screens -->
+    <div class="sidebar-small d-lg-none">
+      <nav>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <hr class="divider">
+            <a class="nav-link" routerLink="dashboard" routerLinkActive="active">
+              <i class="fas fa-home"></i>  Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <hr class="divider">
+            <a class="nav-link" routerLink="students" routerLinkActive="active">
+                <i class="fas fa-user-graduate"></i>  Students 
+            </a>
+          </li>
+          <li class="nav-item">
+            <hr class="divider">
+            <a class="nav-link" routerLink="teachers" routerLinkActive="active">
+                <i class="fas fa-chalkboard-teacher"></i> Teachers
+            </a>
+          </li>
+          <li class="nav-item">
+            <hr class="divider">
+            <a class="nav-link" routerLink="students/add/grades" routerLinkActive="active">
+              <i class="fas fa-calendar"></i> Schedule
+            </a>
+          </li>
+          <li class="nav-item">
+            <hr class="divider">
+            <a class="nav-link" routerLink="official/main/notice-board" routerLinkActive="active">
+              <i class="fas fa-bullhorn"></i> Notice Board
+            </a>
+          </li>
+          <li class="nav-item">
+            <hr class="divider">
+            <a class="nav-link" routerLink="students/attendance" (click)="handleLogOut()">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+            <hr class="divider">
+          </li>
+        </ul>
+      </nav>
+    </div>
+  
+    <!-- Content area -->
+    <div class="content-header content-area row" style="height: fit-content; background-color:#01427a">
+      <h2 class="col-10">Welcome to the School Management Portal</h2>
+      <h6 class="col-2">Academic Year : {{ currentYear }}</h6>
+      
     </div>
     
-
-</div>
+    
+    <div class="content-area">
+      
+      <div class="container-fluid">
+        
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  
+  
+  

@@ -13,7 +13,7 @@ export class UserLoginComponent implements OnInit {
   login_id: string;
   password: string;
   loading: boolean = false;
-  role: string = 'teacher'
+  role: string = '';
 
   session_login_id: string;
   session_role: string;
