@@ -90,7 +90,7 @@ pub async fn update_student(path: web::Path<i32>, // Path parameter for student_
 }
 
 
-// Delete student handler function
+//Delete student handler function
 pub async fn delete_student(path: web::Path<i32>, pool: web::Data<PgPool>, ) -> impl Responder {
     let student_id = path.into_inner();
 

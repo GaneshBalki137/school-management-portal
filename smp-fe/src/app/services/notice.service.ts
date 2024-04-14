@@ -13,6 +13,6 @@ export class NoticeService {
     constructor(private http:HttpClient){}
 
     getAllNotices():Observable<Notice[]>{
-        return this.http.get<Notice[]>(`${this.baseUrl}/get/all/notices"`);
+        return this.http.get<Notice[]>(`${this.baseUrl}/get/all/notices`);
     }
 }

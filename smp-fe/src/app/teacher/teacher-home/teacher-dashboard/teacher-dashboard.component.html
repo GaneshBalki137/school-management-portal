@@ -3,22 +3,17 @@
         <main role="main" class="container">
             <div class="my-3 p-3 bg-white rounded box-shadow">
                 <h6 class=" border-none pb-2 mb-0">Today's Schedule</h6>
-                <div class="card mb-3 ">
-                    <div class="card-body">
-                        <h5 class="card-title">Lecture Title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Subclass</h6>
-                        <p class="card-text">Time: 10:00 AM - 12:00 PM</p>
-                        <!-- Add more details about the lecture if needed -->
-                    </div>
+                <div class="card mb-3 " *ngFor="let t of todays_timetable;let i index">
+                    <ng-container *ngIf="day_of_week===t.day_of_week">
+                        <div class="card-body" id="{{i}}">
+                            <h5 class="card-title">{{t.subject_name}}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Class : {{t.class_id+4}}</h6>
+                            <p class="card-text">Time: {{t.start_time}}:00  - {{t.end_time}}:00 </p>
+                            <!-- Add more details about the lecture if needed -->
+                        </div>
+                    </ng-container>
                 </div>
-                <div class="card mb-3 ">
-                    <div class="card-body">
-                        <h5 class="card-title ">Lecture Title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Subclass</h6>
-                        <p class="card-text">Time: 10:00 AM - 12:00 PM</p>
-                        <!-- Add more details about the lecture if needed -->
-                    </div>
-                </div>
+                
             </div>
         </main>
     </div>
@@ -32,17 +27,19 @@
                 <h6 class="border-bottom border-gray pb-2 mb-0">Recent Updates</h6>
 
                 <!-- add for loop to this div -->
-                <div class="media text-muted pt-3">
-                    <div class="mr-2 rounded-circle  text-white"
-                        style="width: 32px; height: 32px; line-height: 32px; text-align: center; background-color:#e14177">01</div>
-                    <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                        <h6 class="mb-2">Notice Title</h6>
-                        <div class="text-gray-dark">Date: January 1, 2024</div>
-                        <p>
-                            Notice content goes here. It can be as long or as short as necessary to convey the
-                            information.
-                        </p>
-                    </div>
+                <div class="media text-muted pt-3" *ngFor="let notice of notices;let i = index">
+                    <ng-container *ngIf="!isNoticeExpired(notice.expiry_date)">
+                        <div class="mr-2 rounded-circle  text-white"
+                            style="width: 32px; height: 32px; line-height: 32px; text-align: center; background-color:#e14177">
+                            {{notice.publish_date | slice:-2}}</div>
+                        <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                            <h6 class="mb-2">{{notice.title}}</h6>
+                            <div class="text-gray-dark">Date: {{notice.publish_date}}</div>
+                            <p>
+                                {{notice.content}}
+                            </p>
+                        </div>
+                    </ng-container>
                 </div>
 
 

@@ -10,6 +10,8 @@ import { AdminModule } from './admin/admin.module';
 import { TeacherModule } from './teacher/teacher.module';
 import { DropdownModule } from './shared/dropdown.module';
 import { NoticeComponent } from './notice/notice.component';
+import { NoticeService } from './services/notice.service';
+import { CommonService } from './services/common.service';
 
 
 @NgModule({
@@ -27,7 +29,7 @@ import { NoticeComponent } from './notice/notice.component';
     DropdownModule
   ],
   providers: [
-    AuthService,LogInService
+    AuthService,LogInService,NoticeService,CommonService
   ],
   bootstrap: [AppComponent]
 })

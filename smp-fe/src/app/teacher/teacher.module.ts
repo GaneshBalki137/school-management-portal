@@ -6,6 +6,7 @@ import { TeacherRoutingModule } from './teacher.routing.module';
 import { TeacherAttendenceComponent } from './teacher-home/teacher-attendence/teacher-attendence.component';
 import { MarkAttendenceComponent } from './teacher-home/mark-attendence/mark-attendence.component';
 import { AddGradesComponent } from './teacher-home/add-grades/add-grades.component';
+import { TeacherService } from './teacher.service';
 
 
 @NgModule({
@@ -19,6 +20,9 @@ import { AddGradesComponent } from './teacher-home/add-grades/add-grades.compone
   imports: [
     CommonModule,
     TeacherRoutingModule
+  ],
+  providers:[
+         TeacherService
   ]
 })
 export class TeacherModule { }

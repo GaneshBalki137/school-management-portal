@@ -10,6 +10,8 @@ use sqlx::PgPool;
 use crate::handlers::admin::{add_student,get_all_students,update_student,delete_student,
                              add_teacher,get_all_teachers,update_teacher,delete_teacher};
 use crate::handlers::shared::{get_notices};
+use crate::handlers::teacher::{get_timetable};
+use crate::handlers::student::{get_student_by_class};
 mod models;
 
 #[actix_web::main]
@@ -38,6 +40,9 @@ async fn main() -> std::io::Result<()> {
             .service(web::resource("/update_teacher/{teacher_id}").route(web::put().to(update_teacher)))
             .service(web::resource("/delete_teacher/{teacher_id}").route(web::delete().to(delete_teacher)))
             .service(web::resource("/get/all/notices").route(web::get().to(get_notices)))
+            .service(web::resource("/get_timetable/{teacher_id}/{day_of_week}").route(web::get().to(get_timetable)))
+            .service(web::resource("/get/student-by/class/{class_id}").route(web::get().to(get_student_by_class)))
+
     })
     .bind("127.0.0.1:3000")?
     .run()

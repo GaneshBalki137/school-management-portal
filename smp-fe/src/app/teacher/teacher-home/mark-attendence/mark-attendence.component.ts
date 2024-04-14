@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class MarkAttendenceComponent {
 
+  // selected_class_students:Student[];
+  // constructor(private studentService:StudentService){
+  //   this.selected_class_students=studentService.getStudentsByClass();
+  // }
+
 }

@@ -65,15 +65,16 @@ CREATE TABLE public.Notice (
 CREATE TABLE public.Timetable (
     timetable_id SERIAL PRIMARY KEY,
     day_of_week VARCHAR(20),
-    start_time TIME,
-    end_time TIME,
+    start_time VARCHAR(2),
+    end_time VARCHAR(2),
+    subject_name VARCHAR(10),
     class_id INT REFERENCES public.Class(class_id),
     subject_id INT REFERENCES public.Subject(subject_id),
     teacher_id INT REFERENCES public.Teacher(teacher_id)
 );
 
 CREATE TABLE public.Login (
-    login_id VARCHAR(50) PRIMARY KEY,
+    login_id VARCHAR(50) PRIMARY key,
     password VARCHAR(100),
     role VARCHAR(20)
 );
