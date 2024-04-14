@@ -1,39 +1,97 @@
-body {
-    background-color: #fbfbfb;
+.divider {
+  border-top: 1px solid #dee2e6;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+/* Custom CSS for content header */
+.content-header {
+  /* background-color: #007bff; */
+  background-color: #357d95;
+  color: #ffffff;
+  padding: 20px;
+  /* margin-bottom: 20px; */
+}
+
+
+/* Custom CSS for sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  background-color: #f8f9fa;
+  padding: 48px 0;
+  overflow-x: hidden;
+  transition: all 0.3s;
+  width: 250px; /* Set default width */
+}
+
+.sidebar-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh - 48px);
+  padding-top: 0.5rem;
+  overflow-y: auto;
+}
+
+/* Sidebar for Small Screens */
+.sidebar-small {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: -250px; /* Initially hidden */
+  z-index: 100;
+  background-color: #f8f9fa;
+  padding: 48px 0;
+  overflow-x: hidden;
+  transition: all 0.3s;
+  width: 250px;
+}
+
+.sidebar-small.open {
+  left: 0; /* Displayed when open */
+}
+
+/* Custom CSS for content area */
+.content-area {
+  padding: 20px;
+  margin-left: 250px; /* Ensure content area is visible by default */
+}
+
+/* Adjust content area margin for smaller screens */
+@media (max-width: 992px) {
+  .content-area {
+    margin-left: 0; /* Remove margin for smaller screens */
   }
-  @media (min-width: 991.98px) {
-    main {
-      padding-left: 240px;
-    }
+}
+
+/* Custom CSS for toggle button - Hamburger Icon */
+.toggle-btn {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 200;
+  cursor: pointer;
+}
+
+/* Custom CSS for active link */
+.nav-link.active {
+  /* background-color: #007bff; */
+    background-color: #01b3ef;
+  color: #ffffff;
+}
+
+.sidebar.closed,
+.sidebar-small.closed {
+  left: -250px; /* Hide sidebar for large screens */
+}
+
+/* For small screens, adjust margin instead: */
+@media (max-width: 992px) {
+  .sidebar.closed,
+  .sidebar-small.closed {
+    margin-left: -250px; /* Hide sidebar for small screens */
   }
-  
-  /* Sidebar */
-  .sidebar {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    padding: 58px 0 0; /* Height of navbar */
-    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 5%), 0 2px 10px 0 rgb(0 0 0 / 5%);
-    width: 240px;
-    z-index: 600;
-  }
-  
-  @media (max-width: 991.98px) {
-    .sidebar {
-      width: 100%;
-    }
-  }
-  .sidebar .active {
-    border-radius: 5px;
-    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
-  }
-  
-  .sidebar-sticky {
-    position: relative;
-    top: 0;
-    height: calc(100vh - 48px);
-    padding-top: 0.5rem;
-    overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-  }
+}
