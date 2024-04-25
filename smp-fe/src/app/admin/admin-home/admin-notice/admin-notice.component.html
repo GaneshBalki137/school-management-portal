@@ -1,0 +1,73 @@
+<!-- 
+<div class="media text-muted pt-3" *ngFor="let notice of notices;let i = index">
+    <ng-container *ngIf="!isNoticeExpired(notice.expiry_date)">
+        <div class="mr-2 rounded-circle  text-white"
+            style="width: 32px; height: 32px; line-height: 32px; text-align: center; background-color:#e14177">
+            {{notice.publish_date | slice:-2}}</div>
+        <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+            <h6 class="mb-2">{{notice.title}}</h6>
+            <div class="text-gray-dark">Date: {{notice.publish_date}}</div>
+            <p>
+                {{notice.content}}
+            </p>
+        </div>
+    </ng-container>
+</div> -->
+
+<main id="main" class="main">
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 mb-4">
+            <div class="card h-100 shadow">
+                <div class="notice card-header bg-primary">
+                    <h5 >Add Notice</h5>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" class="form-control" id="title" [(ngModel)]="title" name="title" style="background-color: aliceblue;">
+                        </div>
+                        <div class="form-group">
+                            <label for="content">Content</label>
+                            <textarea class="form-control" id="content" [(ngModel)]="content" name="content" rows="5" style="background-color: aliceblue;"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="publish_date">Publish Date</label>
+                            <input type="date" class="form-control" id="publish_date" [(ngModel)]="publishDate" name="publishDate" style="background-color: aliceblue;">
+                        </div>
+                        <div class="form-group">
+                            <label for="expiry_date">Expiry Date</label>
+                            <input type="date" class="form-control" id="expiry_date" [(ngModel)]="expiryDate" name="expiryDate" style="background-color: aliceblue;">
+                        </div>
+                        <button class="btn btn-success" type="submit" (click)="addNotice()">Add Notice</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="d-flex flex-wrap">
+                <div class="col-md-6 mb-4" *ngFor="let notice of notices; let i = index">
+                    <ng-container *ngIf="!isNoticeExpired(notice.expiry_date)">
+                        <div class="card h-100">
+                            <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
+                                <h5>{{ notice.title }}</h5>
+                                <button class="btn btn-sm btn-success" (click)="deleteNotice(notice.notice_id)">
+                                    <i class="fas fa-trash"></i> 
+                                </button>
+                            </div>
+                            <div class="card-body" style="background-color: aliceblue;">
+                            <p class="card-text">{{ notice.content }}</p>
+                            </div>
+                            <div class="card-footer text-muted">
+                            Date: {{ notice.publish_date }}
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</main>

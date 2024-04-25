@@ -1,72 +1,200 @@
-<div class="col">
+<main id="main" class="main">
+    <!-- <div class="col">
     <div class="row">
         <div class="col-2 mb-3">
-            <select name="" id="" class="dropdown btn btn-secondary w-100">
-                <option value="">Class 1</option>
-                <option value="">Class 2</option>
-                <option value="">Class 3</option>
-                <option value="">Class 4</option>
-                <option value="">Class 5</option>
-            </select>
+           
+                
+              <label for="classDropdown">Select Class:</label>
+              <select name="" id="" class="dropdown btn btn-secondary w-100" [(ngModel)]="selectedClassId" (change)="getStudentsFromClass()">
+                <option value="" disabled selected>Select Class</option>
+                <option *ngFor="let classId of classDropdownOptions" [ngValue]="classId"> Class {{classId + 4 }}</option>
+              </select>
+              
         </div>
         <div class="col-2 mb-3">
-            <select name="" id="" class="dropdown btn btn-primary w-100">
-                <option value="">Sub 1</option>
-                <option value="">Sub 2</option>
-                <option value="">Sub 3</option>
-                <option value="">Sub 4</option>
-                <option value="">Sub 5</option>
+            <label for="classDropdown">Select Subject:</label>
+            
+            <select name="" id="" class="dropdown btn btn-primary w-100" [(ngModel)]="selectedSubject" (change)="onSubjectChange($event)">
+                <option value="" >Select Subject</option>
+                <option *ngFor="let subject of getSubjects(selectedClassId)" [value]="subject.subject_id">
+                    {{subject.subject_name}}
+                </option>
             </select>
+            
         </div>
     </div>
 
     <div class="row">
-        <table class="table table-hover">
-            <thead>
+        <table class="table table-striped table-bordered table-hover">
+            
+            <thead style="background-color: #007bff; color:white">
                 <tr>
-                    <th scope="col">Roll No</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Mark Attendance</th>
-                    <th scope="col">Action</th>
+                    <th scope="col" style="width: 10%;">Student ID</th>
+                    <th scope="col" style="width: 23%;">First</th>
+                    <th scope="col" style="width: 23%;">Last</th>
+                    <th scope="col" style="width: 20%;">Status</th>
+                    <th scope="col" style="width: 24%;">Mark Attendance</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td class="align-middle">Mark</td>
-                    <td class="align-middle">Otto</td>
-                    <td class="align-middle ">P</td>
+                <tr *ngFor="let student of selected_class_students |async; let i = index">
+                    <th scope="row">{{student.student_id}}</th>
+                    <td class="align-middle">{{student.first_name}}</td>
+                    <td class="align-middle">{{student.last_name}}</td>
+                    <td class="align-middle ">{{attendanceRecords[i].status}}</td>
                     <td class="align-middle ">
                         <div class="btn-group" role="group" aria-label="Mark Attendance">
-                            <button type="button" class="btn btn-danger">A</button>
-                            <button type="button" class="btn btn-primary">P</button>
-                            <button type="button" class="btn btn-success">L</button>
+                            <button type="button" class="btn btn-danger" (click)="markAttendence(i,'A')">A</button>
+                            <button type="button" class="btn btn-primary" (click)="markAttendence(i,'P')">P</button>
+                            <button type="button" class="btn btn-success" (click)="markAttendence(i,'L')">L</button> <span style="margin-left: 3%;"></span>
+                            <button type="button" class="btn btn-warning" (click)="resetAttendence(i)">Reset</button>
                         </div>
                     </td>
-                    <td class="align-middle ">
-                        <button class="btn btn-primary">Submit</button>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">1</th>
-                    <td class="align-middle">Mark</td>
-                    <td class="align-middle">Otto</td>
-                    <td class="align-middle ">P</td>
-                    <td class="align-middle ">
-                        <div class="btn-group" role="group" aria-label="Mark Attendance">
-                            <button type="button" class="btn btn-danger">A</button>
-                            <button type="button" class="btn btn-primary">P</button>
-                            <button type="button" class="btn btn-success">L</button>
-                        </div>
-                    </td>
-                    <td class="align-middle ">
-                        <button class="btn btn-primary">Submit</button>
-                    </td>
+                   
                 </tr>
                
             </tbody>
         </table>
     </div>
+    <div class="row">
+        <button class="btn btn-primary" *ngIf="hasStudents()" (click)="submitAttendance()">Submit Attendance</button>
+    </div>
+    <div *ngIf="showSuccessMessage" class="alert alert-success mt-3">
+        Attendance submitted successfully!
+    </div>
+    
+</div> -->
+
+
+
+
+<div class="col">
+    <ng-container *ngIf="isClass; else noclass">
+        <div class="row">
+            <div class="col-3 mb-3">
+                <h4 style="color: #007bff;">Ongoing Class</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3" style="padding: 1%;">
+                <div class="shadow" style="background-color: #f8f9fa; padding: 15px; ">
+                    <div class="row">
+                        <!-- First child div on the left side -->
+                        <div class="col-6 align-self-center text-center">
+                            <h5 style="color: #495057;">Class</h5>
+                            <p>{{ current_hour_timetable?.class_id}}</p>
+                        </div>
+                        <!-- Second child div on the right side -->
+                        <div class="col-6 align-self-center text-center">
+                            <i class="fas fa-school" style="font-size: 35px; color: #6c757d;;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" style="padding: 1%;">
+                <div class="shadow" style="background-color: #f8f9fa; padding: 15px;">
+
+                    <div class="row">
+                        <!-- First child div on the left side -->
+                        <div class="col-6 align-self-center text-center">
+                            <h5 style="color: #495057;">Subject</h5>
+                            <p>{{ current_hour_timetable?.subject_name }}</p>
+                        </div>
+                        <!-- Second child div on the right side -->
+                        <div class="col-6 align-self-center text-center">
+                            <i class="fas fa-book" style="font-size: 35px; color: #6610f2;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" style="padding: 1%;">
+                <div class="shadow" style="background-color: #f8f9fa; padding: 15px;">
+
+                    <div class="row">
+                        <!-- First child div on the left side -->
+                        <div class="col-6 align-self-center text-center">
+                            <h5 style="color: #495057;">Start At</h5>
+                            <p>{{ current_hour_timetable?.start_time  + ' : 00'}}</p>
+                        </div>
+                        <!-- Second child div on the right side -->
+                        <div class="col-6 align-self-center text-center">
+                            <i class="fas fa-clock" style="font-size: 35px; color: #007bff;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" style="padding: 1%;">
+                <div class="shadow" style="background-color: #f8f9fa; padding: 15px;">
+
+                    <div class="row">
+                        <!-- First child div on the left side -->
+                        <div class="col-6 align-self-center text-center">
+                            <h5 style="color: #495057;">End At</h5>
+                            <p>{{ current_hour_timetable?.end_time + ' : 00' }}</p>
+                        </div>
+                        <!-- Second child div on the right side -->
+                        <div class="col-6 align-self-center text-center">
+                            <i class="fas fa-stopwatch" style="font-size: 35px; color: #28a745;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="row " style="padding: 1%;">
+            <table class="shadow table table-striped table-bordered table-hover" >
+
+                <thead style="background-color: #007bff; color:white">
+                    <tr>
+                        <th scope="col" style="width: 10%;">Student ID</th>
+                        <th scope="col" style="width: 23%;">First</th>
+                        <th scope="col" style="width: 23%;">Last</th>
+                        <th scope="col" style="width: 20%;">Status</th>
+                        <th scope="col" style="width: 24%;">Mark Attendance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let student of selected_class_students |async; let i = index">
+                        <th scope="row">{{student.student_id}}</th>
+                        <td class="align-middle">{{student.first_name}}</td>
+                        <td class="align-middle">{{student.last_name}}</td>
+                        <td class="align-middle ">{{attendanceRecords[i].status}}</td>
+                        <td class="align-middle ">
+                            <div class="btn-group" role="group" aria-label="Mark Attendance">
+                                <button type="button" class="btn btn-danger" (click)="markAttendence(i,'A')">A</button>
+                                <button type="button" class="btn btn-primary" (click)="markAttendence(i,'P')">P</button>
+                                <!-- <button type="button" class="btn btn-success" (click)="markAttendence(i,'L')">L</button> -->
+                                <span style="margin-left: 3%;"></span>
+                                <button type="button" class="btn btn-warning"
+                                    (click)="resetAttendence(i)">Reset</button>
+                            </div>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+            <div class="">
+                <button class="btn btn-primary" *ngIf="hasStudents()" (click)="submitAttendance()">Submit
+                    Attendance</button>
+            </div>
+            
+        </div>
+        <div *ngIf="showSuccessMessage" class="alert alert-success mt-3">
+            Attendance submitted successfully!
+        </div>
+        
+
+    </ng-container>
+    <ng-template #noclass>
+        <div class="row">
+            <div class="col-12 mb-3 text-center">
+                <h3 style="color: rgb(245, 10, 49);"> NO ACTIVE LECTURES</h3>
+            </div>
+        </div>
+    </ng-template>
 </div>
+</main>

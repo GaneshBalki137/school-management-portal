@@ -1,62 +1,299 @@
-<div class="col">
+<main id="main" class="main">
+  <div class="col">
     <div class="row">
-        <div class="col-2 mb-3">
-            <select name="" id="" class="dropdown btn btn-success w-100" (change)="getStudents($event.target.value)">
-                <option value="1">Class 5</option>
-                <option value="2">Class 6</option>
-                <option value="3">Class 7</option>
-                <option value="4">Class 8</option>
-                <option value="5">Class 9</option>
-                <option value="6">Class 10</option>
-            </select>
-        </div>
-        <div class="col-2">
-            <button class="btn btn-primary w-100">Add Student</button>
-        </div>
+      <div class="col-2 mb-2" style="color: #01427a;">
+        Select Class
+      </div>
     </div>
+    <div class="row">
+      <div class="col-2 mb-3">
+        <select name="" id="" class="dropdown btn btn-warning w-100" (change)="getStudents($event.target.value)"
+          style="height: 2.5em; color: white;">
+          <option value="1">Class 1</option>
+          <option value="2">Class 2</option>
+          <option value="3">Class 3</option>
+          <option value="4">Class 4</option>
+          <option value="5">Class 5</option>
+          <option value="6">Class 6</option>
+          <option value="7">Class 7</option>
+          <option value="8">Class 8</option>
+          <option value="9">Class 9</option>
+          <option value="10">Class 10</option>
+        </select>
+      </div>
+      <!-- <div class="col-2"> -->
+      <div class="col-md-2" *ngIf="!showUpdateForm">
+        <a class="nav-link btn btn-primary btn-block" (click)="onAddStudentClick()"
+          *ngIf="!toggleAddStudent; else cancel" style="height: 2.5em;">
+          Add Student
+        </a>
+        <!-- <a class="nav-link btn btn-success" routerLink="add_student">Add Student</a> -->
+        <ng-template #cancel>
+          <button class="btn btn-secondary" (click)="onCancelClick()">Cancel</button>
+        </ng-template>
+      </div>
+    </div>
+    <div>
+      <!-- ADD STUDENT -->
+      <ng-container *ngIf="toggleAddStudent">
+        <!-- Your content goes here -->
+        <div class="card">
+          <div class="card-body" style="background-color: #f8f9fa;">
+            <div class="mb-3">
+              <!-- <div class="p-2 card-header" style="background-color: white;">  -->
+              <h2 class="h3">Student Registration</h2>
+              <h3 class="fs-6 fw-normal text-secondary m-0">Enter details to register student</h3>
+              <!-- </div> -->
+            </div>
+            <form>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="firstName">First Name<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control rounded-2" id="firstName" [(ngModel)]="firstName"
+                      name="firstName">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="lastName">Last Name<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control rounded-2" id="lastName" [(ngModel)]="lastName"
+                      name="lastName">
+                  </div>
+                </div>
+              </div>
 
-    <div class="row">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">Roll No</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">DOB</th>
-                    <th scope="col">Gender</th>
-                    <th scope="col">Mobile</th>
-                    <th scope="col">Email</th>
-                    <th scope="col" style="text-align: center;">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="align-middle">1</td>
-                    <td class="align-middle">Peter</td>
-                    <td class="align-middle">Parker</td>
-                    <td class="align-middle ">1999-01-01</td>
-                    <td class="align-middle">Male</td>
-                    <td class="align-middle ">0700000000</td>
-                    <td class="align-middle">zzzz&#64;gmail.com</td>
-                    <td class="align-middle "> 
-                        <button class="btn btn-warning" style="color: white;">Update</button> | 
-                        <button class="btn btn-danger">Delete</button>
-                    </td>
-                </tr>
-                <!-- <tr *ngFor="let student of students">
-                        <td class="align-middle">{{ student.student_id }}</td>
-                        <td class="align-middle">{{ student.first_name }}</td>
-                        <td class="align-middle">{{ student.last_name }}</td>
-                        <td class="align-middle">{{ student.dob }}</td>
-                        <td class="align-middle">{{ student.gender }}</td>
-                        <td class="align-middle">{{ student.mobile }}</td>
-                        <td class="align-middle">{{ student.email }}</td>
-                        <td class="align-middle ">
-                            <button class="btn btn-warning" style="color: white;">Update</button> | 
-                            <button class="btn btn-danger">Delete</button>
-                        </td>
-                </tr> -->
-            </tbody>
-        </table>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="dateOfBirth">Date of Birth<span class="text-danger">*</span></label>
+                    <input type="date" class="form-control rounded-2" id="dateOfBirth" [(ngModel)]="dateOfBirth"
+                      name="dateOfBirth">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="gender">Gender<span class="text-danger">*</span></label>
+                    <div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="male" name="gender" [(ngModel)]="gender"
+                          value="Male">
+                        <label class="form-check-label" for="male">Male</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="female" name="gender" [(ngModel)]="gender"
+                          value="Female">
+                        <label class="form-check-label" for="female">Female</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="others" name="gender" [(ngModel)]="gender"
+                          value="Others">
+                        <label class="form-check-label" for="others">Others</label>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="phoneNumber">Mobile<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control rounded-2" id="phoneNumber" [(ngModel)]="phoneNumber"
+                      name="phoneNumber">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="email">Email<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control rounded-2" id="email" [(ngModel)]="email" name="=email">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="address">Address<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control rounded-2" id="address" [(ngModel)]="address" name="address">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="className">Class <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control rounded-2" id="className" [(ngModel)]="className"
+                      name="className">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="addmissionDate">Admission Date<span class="text-danger">*</span></label>
+                    <input type="date" class="form-control rounded-2" id="addmissionDate" [(ngModel)]="addmissionDate"
+                      name="addmissionDate">
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <button class="btn bsb-btn-xl btn-primary" type="submit" (click)="addStudent()">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </ng-container>
+
+      <!-- UPDATE STUDENT -->
+      <ng-container *ngIf="showUpdateForm">
+        <div class="card">
+          <div class="card-body" style="background-color: #f8f9fa;">
+            <div class="mb-3">
+              <!-- <div class="p-2 card-header" style="background-color: white;">  -->
+              <h2 class="h3">Update Student Details</h2>
+              <h3 class="fs-6 fw-normal text-secondary m-0">Do the required changes</h3>
+              <!-- </div> -->
+            </div>
+
+           <form>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="rollNo">Roll Number</label>
+                    <input type="text" class="form-control rounded-2" id="rollNo" [(ngModel)]="rollNo" readonly
+                      name="rollNo">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="updateFirstName">First Name<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control rounded-2" id="updateFirstName" [(ngModel)]="updateFirstName"
+                      name="updateFirstName">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="updateLastName">Last Name<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control rounded-2" id="updateLastName" [(ngModel)]="updateLastName"
+                      name="updateLastName">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="updateDob">Date of Birth<span class="text-danger">*</span></label>
+                    <input type="text" class="form-control rounded-2" id="updateDob" [(ngModel)]="updateDob"
+                      name="updateDob">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="updateGender">Gender<span class="text-danger">*</span></label>
+                    <div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="male" name="updateGender"
+                          [(ngModel)]="updateGender" value="Male">
+                        <label class="form-check-label" for="male">Male</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="female" name="updateGender"
+                          [(ngModel)]="updateGender" value="Female">
+                        <label class="form-check-label" for="female">Female</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="others" name="updateGender"
+                          [(ngModel)]="updateGender" value="Others">
+                        <label class="form-check-label" for="others">Others</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="phone_number">Phone Number<span class="text-danger">*</span></label>
+                      <input type="text" class="form-control rounded-2" id="phone_number"
+                        [(ngModel)]="updatePhoneNumber" name="updatePhoneNumber">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="address">Address<span class="text-danger">*</span></label>
+                      <input type="text" class="form-control rounded-2" id="address" [(ngModel)]="updateAddress"
+                        name="address">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="email">Email<span class="text-danger">*</span></label>
+                      <input type="email" class="form-control rounded-2" id="email" [(ngModel)]="updateEmail"
+                        name="updateEmail">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="updateClassId">Class Name<span class="text-danger">*</span></label>
+                      <input type="text" class="form-control rounded-2" id="updateClassId" [(ngModel)]="updateClassId"
+                        name="updateClassId">
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <button class="btn btn-primary" (click)="updateStudentForm()">Update</button>
+            </div>
+            </form>
+          </div>
+        </div>
+      </ng-container>
+
     </div>
-</div>
+    <hr>
+    <div class="row">
+      <div class="card">
+        <table class="table table-striped table-hover">
+          <thead class="tablehead" style="background-color: #007bff;">
+            <tr>
+              <th scope="col">Roll No.</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Date of Birth</th>
+              <th scope="col">Gender</th>
+              <th scope="col">Mobile</th>
+              <th scope="col">Email</th>
+              <th scope="col" style="text-align: center;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of students">
+              <td class="align-middle">{{ student.student_id }}</td>
+              <td class="align-middle">{{ student.first_name }}</td>
+              <td class="align-middle">{{ student.last_name }}</td>
+              <td class="align-middle">{{ student.date_of_birth }}</td>
+              <td class="align-middle">{{ student.gender }}</td>
+              <td class="align-middle">{{ student.phone_number }}</td>
+              <td class="align-middle">{{ student.email }}</td>
+              <td class="align-middle text-center">
+                <button class="btn btn-warning btn-sm mr-1" style="color: white;"
+                  (click)="updateStudent(student)">Update</button>
+                <button class="btn btn-danger btn-sm"
+                  (click)="confirmDelete(student.student_id, student.class_id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,50 @@
+<div class="col">
+    <div class="row">
+        <div class="col-2 mb-2" style="color: #01427a;">
+            Select Class
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2 mb-3">
+            <select name="" id="" class="dropdown btn btn-warning w-100 text-white" (change)="getStudents($event.target.value)"
+            style="height: 2.5em;">
+                <option>Class</option>
+                <option value="1">Class 1</option>
+                <option value="2">Class 2</option>
+                <option value="3">Class 3</option>
+                <option value="4">Class 4</option>
+                <option value="5">Class 5</option>
+                <option value="6">Class 6</option>
+                <option value="7">Class 7</option>
+                <option value="8">Class 8</option>
+                <option value="9">Class 9</option>
+                <option value="10">Class 10</option>
+            </select>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <table class="table table-striped table-bordered table-hover">
+            <thead class="table">
+                <tr>
+                    <th scope="col">Roll No.</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col" style="text-align: center;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let student of students" [students]="student">
+                    <td class="align-middle">{{ student.student_id }}</td>
+                    <td class="align-middle">{{ student.first_name }}</td>
+                    <td class="align-middle">{{ student.last_name }}</td>
+                    <td class="align-middle text-center">
+                        <button class="btn btn-warning text-white" (click)="selectStudent(student)">View Grades</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

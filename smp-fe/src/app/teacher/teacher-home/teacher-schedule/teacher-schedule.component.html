@@ -1,4 +1,5 @@
-<!-- <div class="container">
+<main id="main" class="main">
+    <!-- <div class="container">
     <div class="timetable-img text-center">
         <img src="img/content/timetable.png" alt="">
     </div>
@@ -181,17 +182,11 @@
 
 
   <div class="container">
-    <div class="row">
-        <div class="col-12 text-center">
-            <img src="img/content/timetable.png" alt="" class="timetable-img">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="table-responsive">
-                <table class="table table-bordered text-center">
-                    <thead>
-                        <tr class="bg-light-gray" style="background-color: #2b7dd0; color:white">
+    <div class=" shadow card-body">
+        <h5 class="card-title">Weekly Timetable</h5>
+                <table class=" table  text-center ">
+                    <thead class="dashboard">
+                        <tr>
                             <th class="text-uppercase">Time</th>
                             <th class="text-uppercase">Monday</th>
                             <th class="text-uppercase">Tuesday</th>
@@ -204,83 +199,224 @@
                     <tbody>
                         <!-- 9-10 -->
                         <tr>
-                            <td class="align-middle">09:00am</td>
+                            <td class="align-middle bg-time">09:00am</td>
                             <!-- Monday -->
-                            <td>
-                                <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">Dance</span>
+                            <td class="hover-cell">
+                                <span  class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{ getSubjectForDay('Monday', '09')?.subjectName }}</span>
                                 <div class="margin-10px-top font-size14">9:00-10:00</div>
-                                <div class="font-size13 text-light-gray">Ivana Wong</div>
+                                <div class="font-size13 text-light-gray">{{ getSubjectForDay('Monday', '09')?.classId }}</div>
                             </td>
                             <!-- Tuesday -->
-                            <td>
-                                <span class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Yoga</span>
+                            <td class="hover-cell">
+                                <span  class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ getSubjectForDay('Tuesday', '09')?.subjectName }}</span>
                                 <div class="margin-10px-top font-size14">9:00-10:00</div>
-                                <div class="font-size13 text-light-gray">Marta Healy</div>
+                                <div class="font-size13 text-light-gray">{{ getSubjectForDay('Tuesday', '09')?.classId }}</div>
                             </td>
                             <!-- Wednesday -->
-                            <td>
-                                <span class="bg-yellow padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Music</span>
+                            <td class="hover-cell">
+                                <span class="bg-yellow padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ getSubjectForDay('Wednesday', '09')?.subjectName }}</span>
                                 <div class="margin-10px-top font-size14">9:00-10:00</div>
-                                <div class="font-size13 text-light-gray">Ivana Wong</div>
+                                <div class="font-size13 text-light-gray">{{ getSubjectForDay('Wednesday', '09')?.classId }}</div>
+                                
                             </td>
                             <!-- Thursday -->
-                            <td>
-                                <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Dance</span>
+                            <td class="hover-cell">
+                                <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ getSubjectForDay('Thursday', '09')?.subjectName }}</span>
                                 <div class="margin-10px-top font-size14">9:00-10:00</div>
-                                <div class="font-size13 text-light-gray">Ivana Wong</div>
+                                <div class="font-size13 text-light-gray">{{ getSubjectForDay('Thursday', '09')?.classId }}</div>
+                               
                             </td>
                             <!-- Friday -->
-                            <td>
-                                <span class="bg-purple padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Art</span>
+                            <td class="hover-cell">
+                                <span class="bg-purple padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ getSubjectForDay('Friday', '09')?.subjectName }}</span>
                                 <div class="margin-10px-top font-size14">9:00-10:00</div>
-                                <div class="font-size13 text-light-gray">Kate Alley</div>
+                                <div class="font-size13 text-light-gray">{{ getSubjectForDay('Friday', '09')?.classId }}</div>
+                                
                             </td>
                             <!-- Saturday -->
-                            <td>
-                                <span class="bg-pink padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">English</span>
+                            <td class="hover-cell">
+                                <span class="bg-pink padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ getSubjectForDay('Saturday', '09')?.subjectName }}</span>
                                 <div class="margin-10px-top font-size14">9:00-10:00</div>
-                                <div class="font-size13 text-light-gray">James Smith</div>
+                                <div class="font-size13 text-light-gray">{{ getSubjectForDay('Saturday', '09')?.classId}}</div>
+                              
                             </td>
                         </tr>
-                        <!-- Add more rows as needed -->
+
+                        <!-- 10-11 -->
                         <tr>
-                            <td class="align-middle">10:00am</td>
+                            <td class="align-middle bg-time">10:00am</td>
                             <!-- Monday -->
-                            <td>
-                                <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">Dance</span>
-                                <div class="margin-10px-top font-size14">9:00-10:00</div>
-                                <div class="font-size13 text-light-gray">Ivana Wong</div>
+                            <td class="hover-cell">
+                                <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{ getSubjectForDay('Monday', '10')?.subjectName }}</span>
+                                <div class="margin-10px-top font-size14">10:00-11:00</div>
+                                <div class="font-size13 text-light-gray">{{ getSubjectForDay('Monday', '10')?.classId }}</div>
                             </td>
                             <!-- Tuesday -->
-                            <td>
-                                <span class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Yoga</span>
-                                <div class="margin-10px-top font-size14">9:00-10:00</div>
-                                <div class="font-size13 text-light-gray">Marta Healy</div>
+                            <td class="hover-cell">
+                                <span class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ getSubjectForDay('Tuesday', '10')?.subjectName }}</span>
+                                <div class="margin-10px-top font-size14">10:00-11:00</div>
+                                <div class="font-size13 text-light-gray">{{ getSubjectForDay('Tuesday', '10')?.classId }}</div>
                             </td>
                             <!-- Wednesday -->
-                            <td>
-                                <span class="bg-yellow padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Music</span>
-                                <div class="margin-10px-top font-size14">9:00-10:00</div>
-                                <div class="font-size13 text-light-gray">Ivana Wong</div>
+                            <td class="hover-cell" >
+                                <span class="bg-yellow padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ getSubjectForDay('Wednesday', '10')?.subjectName }}</span>
+                                <div class="margin-10px-top font-size14">10:00-11:00</div>
+                                <div class="font-size13 text-light-gray">{{ getSubjectForDay('Wednesday', '10')?.classId }}</div>
+                                
                             </td>
                             <!-- Thursday -->
-                            <td>
-                                <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Dance</span>
-                                <div class="margin-10px-top font-size14">9:00-10:00</div>
-                                <div class="font-size13 text-light-gray">Ivana Wong</div>
+                            <td class="hover-cell">
+                                <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ getSubjectForDay('Thursday', '10')?.subjectName }}</span>
+                                <div class="margin-10px-top font-size14">10:00-11:00</div>
+                                <div class="font-size13 text-light-gray">{{ getSubjectForDay('Thursday', '10')?.classId }}</div>
+                               
                             </td>
                             <!-- Friday -->
-                            <td>
-                                <span class="bg-purple padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">Art</span>
-                                <div class="margin-10px-top font-size14">9:00-10:00</div>
-                                <div class="font-size13 text-light-gray">Kate Alley</div>
+                            <td class="hover-cell">
+                                <span class="bg-purple padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ getSubjectForDay('Friday', '10')?.subjectName }}</span>
+                                <div class="margin-10px-top font-size14">10:00-11:00</div>
+                                <div class="font-size13 text-light-gray">{{ getSubjectForDay('Friday', '10')?.classId }}</div>
+                                
                             </td>
                             <!-- Saturday -->
-                            <td class="bg-light-gray">
+                            <td class="hover-cell">
+                                <span class="bg-pink padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ getSubjectForDay('Saturday', '10')?.subjectName }}</span>
+                                <div class="margin-10px-top font-size14">10:00-11:00</div>
+                                <div class="font-size13 text-light-gray">{{ getSubjectForDay('Saturday', '10')?.classId }}</div>
+                              
+                            </td>
+                        </tr>
+
+                        <!-- 11-12 Break -->
+                        <tr>
+                            <td class="align-middle bg-time">11:00am</td>
+                            <!-- Monday -->
+                            <td class="hover-cell">
+                                <span class="bg-lightred padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">Break</span>
+                                <div class="margin-10px-top font-size14">11:00-12:00</div>
+                            </td>
+                            <!-- Tuesday -->
+                            <td class="hover-cell">
+                                <span class="bg-lightred padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">Break</span>
+                                <div class="margin-10px-top font-size14">11:00-12:00</div>
+                            </td>
+                            <!-- Wednesday -->
+                            <td class="hover-cell">
+                                <span class="bg-lightred padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">Break</span>
+                                <div class="margin-10px-top font-size14">11:00-12:00</div>
+                                
+                            </td>
+                            <!-- Thursday -->
+                            <td class="hover-cell">
+                                <span class="bg-lightred padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">Break</span>
+                                <div class="margin-10px-top font-size14">11:00-12:00</div>
+                               
+                            </td>
+                            <!-- Friday -->
+                            <td class="hover-cell">
+                                <span class="bg-lightred padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">Break</span>
+                                <div class="margin-10px-top font-size14">11:00-12:00</div>
+                                
+                            </td>
+                            <!-- Saturday -->
+                            <td class="hover-cell">
+                                <span class="bg-lightred padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">Break</span>
+                                <div class="margin-10px-top font-size14">11:00-12:00</div>
+                              
+                            </td>
+                        </tr>
+
+                        <!-- 12-13 -->
+                        <tr>
+                            <td class="align-middle bg-time">12:00pm</td>
+                            <!-- Monday -->
+                            <td class="hover-cell">
+                                <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{ getSubjectForDay('Monday', '12')?.subjectName }}</span>
+                                <div class="margin-10px-top font-size14">12:00-13:00</div>
+                                <div class="font-size13 text-light-gray">{{ getSubjectForDay('Monday', '12')?.classId }}</div>
+                            </td>
+                            <!-- Tuesday -->
+                            <td class="hover-cell">
+                                <span class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{ getSubjectForDay('Tuesday', '12')?.subjectName }}</span>
+                                <div class="margin-10px-top font-size14">12:00-13:00</div>
+                                <div class="font-size13 text-light-gray">{{ getSubjectForDay('Tuesday', '12')?.classId }}</div>
+                            </td>
+                            <!-- Wednesday -->
+                            <td class="hover-cell">
+                                <span class="bg-yellow padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{ getSubjectForDay('Wednesday', '12')?.subjectName }}</span>
+                                <div class="margin-10px-top font-size14">12:00-13:00</div>
+                                <div class="font-size13 text-light-gray">{{ getSubjectForDay('Wednesday', '12')?.classId }}</div>
+                                
+                            </td>
+                            <!-- Thursday -->
+                            <td class="hover-cell" >
+                                <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{ getSubjectForDay('Thursday', '12')?.subjectName }}</span>
+                                <div class="margin-10px-top font-size14">12:00-13:00</div>
+                                <div class="font-size13 text-light-gray">{{ getSubjectForDay('Thursday', '12')?.classId }}</div>
+                               
+                            </td>
+                            <!-- Friday -->
+                            <td class="hover-cell" >
+                                <span class="bg-purple padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{ getSubjectForDay('Friday', '12')?.subjectName }}</span>
+                                <div class="margin-10px-top font-size14">12:00-13:00</div>
+                                <div class="font-size13 text-light-gray">{{ getSubjectForDay('Friday', '12')?.classId }}</div>
+                                
+                            </td>
+                            <!-- Saturday -->
+                            <td class="hover-cell">
+                                <span class="bg-pink padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{ getSubjectForDay('Saturday', '12')?.subjectName }}</span>
+                                <div class="margin-10px-top font-size14">12:00-13:00</div>
+                                <div class="font-size13 text-light-gray">{{ getSubjectForDay('Saturday', '12')?.classId }}</div>
+                            </td>
+                        </tr>
+
+                        <!-- 13-14 -->
+                        <tr>
+                            <td class="align-middle bg-time">13:00pm</td>
+                            <!-- Monday -->
+                            <td class="hover-cell">
+                                <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16 xs-font-size13">{{ getSubjectForDay('Monday', '13')?.subjectName }}</span>
+                                <div class="margin-10px-top font-size14">13:00-14:00</div>
+                                <div class="font-size13 text-light-gray">{{ getSubjectForDay('Monday', '13')?.classId }}</div>
+                            </td>
+                            <!-- Tuesday -->
+                            <td class="hover-cell">
+                                <span class="bg-green padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ getSubjectForDay('Tuesday', '13')?.subjectName }}</span>
+                                <div class="margin-10px-top font-size14">13:00-14:00</div>
+                                <div class="font-size13 text-light-gray">{{ getSubjectForDay('Tuesday', '13')?.classId }}</div>
+                            </td>
+                            <!-- Wednesday -->
+                            <td class="hover-cell">
+                                <span class="bg-yellow padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ getSubjectForDay('Wednesday', '13')?.subjectName }}</span>
+                                <div class="margin-10px-top font-size14">13:00-14:00</div>
+                                <div class="font-size13 text-light-gray">{{ getSubjectForDay('Wednesday', '13')?.classId }}</div>
+                                
+                            </td>
+                            <!-- Thursday -->
+                            <td class="hover-cell">
+                                <span class="bg-sky padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ getSubjectForDay('Thursday', '13')?.subjectName }}</span>
+                                <div class="margin-10px-top font-size14">13:00-14:00</div>
+                                <div class="font-size13 text-light-gray">{{ getSubjectForDay('Thursday', '13')?.classId }}</div>
+                               
+                            </td>
+                            <!-- Friday -->
+                            <td class="hover-cell">
+                                <span class="bg-purple padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-white font-size16  xs-font-size13">{{ getSubjectForDay('Friday', '13')?.subjectName }}</span>
+                                <div class="margin-10px-top font-size14">13:00-14:00</div>
+                                <div class="font-size13 text-light-gray">{{ getSubjectForDay('Friday', '13')?.classId }}</div>
+                                
+                            </td>
+                            <!-- Saturday -->
+                            <td class="hover-cell">
+                                <span class="bg-pink padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom text-black font-size16  xs-font-size13">{{ getSubjectForDay('Saturday', '13')?.subjectName }}</span>
+                                <div class="margin-10px-top font-size14">13:00-14:00</div>
+                                <div class="font-size13 text-light-gray">{{getSubjectForDay('Saturday', '13')?.classId }}</div>
+                              
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>
-</div>
+    
+</main>

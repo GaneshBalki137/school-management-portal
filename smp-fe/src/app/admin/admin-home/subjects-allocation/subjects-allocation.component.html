@@ -1,0 +1,93 @@
+<main id="main" class="main">
+    <div class="col">
+        <div class="row">
+            <div class="col-2 mb-2" style="color: #01427a;">
+                Select Details
+            </div>
+            <!-- <div class="row">
+                <div class="col-2 mb-2" style="color: #01427a;">
+                    Select Subject
+                </div>
+            </div> -->
+        </div>
+        <div class="row">
+            <div class="col-2 mb-3">
+                <select name="" id="" class="dropdown btn btn-warning w-100 text-white" (change)="getClass($event.target.value)"
+                    style="height: 2.5em;">
+                    <option>Class</option>
+                    <option value="1">Class 1</option>
+                    <option value="2">Class 2</option>
+                    <option value="3">Class 3</option>
+                    <option value="4">Class 4</option>
+                    <option value="5">Class 5</option>
+                    <option value="6">Class 6</option>
+                    <option value="7">Class 7</option>
+                    <option value="8">Class 8</option>
+                    <option value="9">Class 9</option>
+                    <option value="10">Class 10</option>
+                </select>
+            </div>
+            <div class="col-2 mb-3">
+                <select name="" id="" class="dropdown btn btn-warning w-100 text-white" (change)="getTeacherForSubject($event.target.value)"
+                    style="height: 2.5em;">
+                    <option>Subject</option>
+                    <option value="English">English</option>
+                    <option value="Biology">Biology</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Physics">Physics</option>
+                    <option value="History">History</option>
+                    <option value="Geography">Geography</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Chemistry">Chemistry</option>
+                    <option value="Music">Music</option>
+                </select>
+            </div>
+            <div class="col-2 mb-3">
+                  <div>
+                    <select class="dropdown btn btn-warning w-100 text-white" (change)="onTeacherSelected($event.target.value)" style="height: 2.5em;">
+                      <option value="" disabled selected>Select Teacher</option>
+                      <option *ngFor="let teacher of teachers" [value]="teacher.teacher_id">{{ teacher.first_name}} {{ teacher.last_name }} </option>
+                    </select>
+                  </div>
+                  
+                  <!-- Display selected teacher -->
+                  <!-- <div *ngIf="selectedTeacher">
+                    <p>Selected Teacher: {{ selectedTeacher }}</p>
+                  </div> -->
+                  
+                  
+            </div>
+            <div class="col-2 mb-3">
+                    <button class="btn btn-primary w-100" style="height: 2.5em;" (click)="addSubjectDetails()">Add Details</button>
+            </div>
+        </div>
+    
+        <hr>
+    
+        <div class="row">
+            <table class="table table-striped table-bordered table-hover">
+                <thead class="tablehead" style="background-color: #007bff; color: white;">
+                    <tr>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Class</th>
+                        <th scope="col">Teacher</th>
+                        <!-- <th scope="col" style="text-align: center;">Actions</th> -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let subject of subjects">
+                        <td class="align-middle">{{ subject.subject_name }}</td>
+                        <td class="align-middle">{{ subject.class_id }}</td>
+                        <td class="align-middle">{{ getTeacherName(subject.teacher_id) }}</td>
+                        <!-- <td class="align-middle text-center">
+                            <button class="btn btn-warning text-white" (click)="selectStudent(student)">View Grades</button>
+    
+                        </td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</main>

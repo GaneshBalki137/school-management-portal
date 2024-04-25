@@ -1,0 +1,34 @@
+<div *ngIf="selectedStudent">
+    <div class="student-info-card">
+        <div class="card-header" style="color: white;">
+            <h2>Report Card</h2>
+        </div>
+        <div class="card-body">
+            <h3 style="color: #01427a;"><i class="fas fa-user-graduate"></i> Student Name: {{ selectedStudent.first_name }} {{ selectedStudent.last_name }}</h3>
+            <h3 style="color: #01427a;"><i class="fas fa-chalkboard"></i> Class: {{ selectedStudent.class_id }}</h3>
+            <!-- <h3 style="color: #01427a;"><i class="fas fa-calendar"></i> Semester: Fall 2024</h3> -->
+        </div>
+    </div>
+    
+    <hr>
+    <table class="table table-striped table-bordered table-hover">
+      <thead class="tablehead" style="color: white;">
+        <tr>
+          <th>Subject</th>
+          <th>Quiz Grade</th>
+          <th>Homework Grade</th>
+          <th>Test Grade</th>
+          <th>Project Grade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let grade of grades">
+          <td>{{ getSubjectName(grade.subject_id)}}</td>
+          <td>{{ grade.quiz_grade }}</td>
+          <td>{{ grade.homework_grade }}</td>
+          <td>{{ grade.test_grade }}</td>
+          <td>{{ grade.project_grade }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

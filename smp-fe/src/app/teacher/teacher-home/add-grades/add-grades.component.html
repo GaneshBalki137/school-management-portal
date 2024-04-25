@@ -1,1 +1,92 @@
-<p>add-grades works!</p>
+<main id="main" class="main">
+    <div class="row" style="padding: 0%;">
+        <!-- student list -->
+        <div [ngClass]="{'col-md-12': !displayGradeEntryForm, 'col-md-6': displayGradeEntryForm}">
+            <div class="row">
+                <!-- Class id -->
+                <div class="col-md-3 mb-3">
+                    <label for="classDropdown"> Class:</label>
+                    <select name="" id="" class="dropdown btn btn-secondary w-100" [(ngModel)]="selectedClassId" (change)="getStudentsFromClass()">
+                        <option value="" disabled selected>Select Class</option>
+                        <option *ngFor="let classId of classDropdownOptions" [ngValue]="classId"> Class {{classId}}</option>
+                    </select>
+                </div>
+                <!-- Select subject -->
+                <div class="col-md-3 mb-3">
+                    <label for="classDropdown">Subject:</label>
+                    <select name="" id="" class="dropdown btn btn-primary w-100" [(ngModel)]="selectedSubject" (change)="onSubjectChange($event)">
+                        <option value="" disabled selected>Select Subject</option>
+                        <option *ngFor="let subject of getSubjects(selectedClassId)" [value]="subject.subject_id">
+                            {{subject.subject_name}}
+                        </option>
+                    </select>
+                </div>
+  
+                <div class="col-md-3 mb-3">
+                  <label for="classDropdown">Semester:</label>
+                  <select name="" id="" class="dropdown btn btn-primary w-100" [(ngModel)]="selectedSemester">
+                      <option value="" disabled selected>Select Sem</option>
+                      <option value="1">Sem 1</option>
+                      <option value="2">Sem 2</option>
+                     
+                  </select>
+              </div>
+            </div>
+  
+            <table class="table table-striped table-bordered table-hover" *ngIf="selectedSubject && selectedSemester">
+                <thead style="background-color: #007bff; color:white">
+                    <tr>
+                        <th scope="col" style="width: 10%;">Student ID</th>
+                        <th scope="col" style="width: 23%;">First</th>
+                        <th scope="col" style="width: 23%;">Last</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let student of selectedClassStudents ; let i = index" (click)="openGradeEntryForm(student)" style="cursor: pointer;">
+                        <th scope="row">{{student.student_id}}</th>
+                        <td class="align-middle">{{student.first_name}}</td>
+                        <td class="align-middle">{{student.last_name}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+  
+        <!-- grade form -->
+        <div [ngClass]="{'': !displayGradeEntryForm, 'col-md-6': displayGradeEntryForm}" style="background-color: #edf2f7;" class="card">
+          
+            <div *ngIf="selectedStudent" class="m-5 card-body">
+                <h4 class="card-title">Grade Entry </h4>
+                <h5 class="">Name: {{ selectedStudent.first_name }} {{ selectedStudent.last_name }}</h5>
+                <hr>
+                
+                    <!-- {{newSubjectId}} , {{selectedSemister}} -->
+                    
+                
+                <p *ngIf="submitGradeMessage" role="alert" class="alert alert-primary">
+                  {{submitGradeMessage}}
+                </p>
+                <form>
+                    <div class="form-group mb-3">
+                        <label for="quizGrade">Quiz Grade:</label>
+                        <input type="number" class="form-control" id="quizGrade" [(ngModel)]="selectedStudent_quizGrade" name="selectedStudent_quizGrade" required min="0" max="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="testGrade">Test Grade:</label>
+                        <input type="number" class="form-control" id="testGrade" [(ngModel)]="selectedStudent_testGrade" name="selectedStudent_testGrade" required min="0" max="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="homeworkGrade">Homework Grade:</label>
+                        <input type="number" class="form-control" id="homeworkGrade" [(ngModel)]="selectedStudent_homeworkGrade"  name="selectedStudent_homeworkGrade" required min="0" max="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="projectGrade">Project Grade:</label>
+                        <input type="number" class="form-control" id="projectGrade" [(ngModel)]="selectedStudent_projectGrade"  name="selectedStudent_projectGrade" required min="0" max="100">
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-5" (click)="submitGrades()">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+  
+  
+</main>

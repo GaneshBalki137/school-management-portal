@@ -1,1 +1,33 @@
-<p>notice works!</p>
+<main id="main" class="main">
+    <div class="card-body">
+        <h5 class="card-title">Notice Board</h5>
+        <div class="filter ml-2 mb-3">
+            <a class="icon" data-bs-toggle="dropdown" style="cursor: pointer;">Filter<i
+                    class="bi bi-funnel"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                <li class="dropdown-header text-start">
+                    <h6>Select</h6>
+                </li>
+                <li><a class="dropdown-item" (click)="getNotices('all')">All<span *ngIf="selectedType === 'all'"><i class="bi bi-check"></i></span></a></li>
+                <li><a class="dropdown-item" (click)="getNotices('active')">Active<span *ngIf="selectedType === 'active'"><i class="bi bi-check"></i></span></a></li>
+                <li><a class="dropdown-item" (click)="getNotices('expired')">Expired<span *ngIf="selectedType === 'expired'"><i class="bi bi-check"></i></span></a></li>
+            </ul>
+        </div>
+        <div class="media text-muted" *ngFor="let notice of selectedTypeNotices;let i = index">
+
+            <!-- <ng-container *ngIf="!isNoticeExpired(notice.expiry_date)"> -->
+            <div class="mr-2 rounded-circle  text-white"
+                style="width: 32px; height: 32px; line-height: 32px; text-align: center; background-color:#e14177">
+                {{notice.publish_date | slice:-2}}</div>
+            <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                <h6 class="mb-2">{{notice.title}}</h6>
+                <div class="text-gray-dark">Date: {{notice.publish_date}}</div>
+                <p>
+                    {{notice.content}}
+                </p>
+            </div>
+            <!-- </ng-container> -->
+        </div>
+    </div>
+</main>

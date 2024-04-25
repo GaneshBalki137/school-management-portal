@@ -9,4 +9,3 @@ pub struct Login {
     password: String,
     role: Role 
 }
-

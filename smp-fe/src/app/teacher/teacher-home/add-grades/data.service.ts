@@ -1,0 +1,15 @@
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DataService {
+  currentSubjectId:number;
+
+  constructor() { }
+
+  changeSubjectId(subjectId: number) {
+    this.currentSubjectId=subjectId;
+  }
+}

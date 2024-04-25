@@ -1,0 +1,12 @@
+<main id="main" class="main">
+  <!-- academic-details.component.html -->
+<div class="row">
+  <div class="col-md-12" *ngIf="!selectedStudent">
+    <app-student-list (studentSelected)="onStudentSelected($event)"></app-student-list>
+  </div>
+  <div class="col-md-12" *ngIf="selectedStudent">
+    <app-student-grades [selectedStudent]="selectedStudent"></app-student-grades>
+  </div>
+</div>
+
+</main>

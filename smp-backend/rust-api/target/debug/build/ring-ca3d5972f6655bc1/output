@@ -623,8 +623,8 @@ cargo:rerun-if-env-changed=HOST_CFLAGS
 HOST_CFLAGS = None
 cargo:rerun-if-env-changed=CFLAGS
 CFLAGS = None
-cargo:warning=/Library/Developer/CommandLineTools/usr/bin/ranlib: file: /Users/apple/Desktop/smp project/school-management-portal/smp-backend/rust-api/target/debug/build/ring-ca3d5972f6655bc1/out/libring-core.a(poly1305.o) has no symbols
-cargo:warning=/Library/Developer/CommandLineTools/usr/bin/ranlib: file: /Users/apple/Desktop/smp project/school-management-portal/smp-backend/rust-api/target/debug/build/ring-ca3d5972f6655bc1/out/libring-core.a(poly1305.o) has no symbols
+cargo:warning=/Library/Developer/CommandLineTools/usr/bin/ranlib: file: /Users/apple/Desktop/smp_project/school-management-portal/smp-backend/rust-api/target/debug/build/ring-ca3d5972f6655bc1/out/libring-core.a(poly1305.o) has no symbols
+cargo:warning=/Library/Developer/CommandLineTools/usr/bin/ranlib: file: /Users/apple/Desktop/smp_project/school-management-portal/smp-backend/rust-api/target/debug/build/ring-ca3d5972f6655bc1/out/libring-core.a(poly1305.o) has no symbols
 cargo:rustc-link-lib=static=ring-core
 OPT_LEVEL = Some("0")
 TARGET = Some("x86_64-apple-darwin")
@@ -652,4 +652,4 @@ HOST_CFLAGS = None
 cargo:rerun-if-env-changed=CFLAGS
 CFLAGS = None
 cargo:rustc-link-lib=static=ring-test
-cargo:rustc-link-search=native=/Users/apple/Desktop/smp project/school-management-portal/smp-backend/rust-api/target/debug/build/ring-ca3d5972f6655bc1/out
+cargo:rustc-link-search=native=/Users/apple/Desktop/smp_project/school-management-portal/smp-backend/rust-api/target/debug/build/ring-ca3d5972f6655bc1/out

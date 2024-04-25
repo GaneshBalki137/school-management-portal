@@ -27,13 +27,14 @@ export class AuthService {
     // return sessionStorage.getItem('token');
     return this.cookieService.get('token');
   }
-  storeToken(token: string, login_id: string, role: string): void {
+  storeToken(token: string, login_id: string, role: string,user_id:number): void {
     // sessionStorage.setItem('token', token);
     // sessionStorage.setItem('login_id', login_id);
     // sessionStorage.setItem('role', role);
     this.cookieService.set('token', token);
     this.cookieService.set('login_id', login_id);
     this.cookieService.set('role', role);
+    this.cookieService.set('user_id',user_id.toString());
     
   }
   getUserRole(): string | null {
@@ -63,19 +64,19 @@ export class AuthService {
     //   // Return the decoded token
     //   return decodedToken;
 
-
-
-
     try {
       const jwtPayload = JSON.parse(atob(token.split('.')[1]));
       const login_id = jwtPayload.sub;
       const role = jwtPayload.role;
       const exp = jwtPayload.exp;
+      const user_id = jwtPayload.user_id;
+     // alert("User id: "+jwtPayload.user_id);
 
       const decodedToken: DecodedToken = {
         sub: login_id,
         role: role,
-        exp: exp
+        exp: exp,
+        user_id: user_id,
       };
 
       return decodedToken;
@@ -85,6 +86,11 @@ export class AuthService {
     }
 
   }
+
+  changePassword(login_id: string, password: string){
+    return this.http.put('http://localhost:3000/change_password', { login_id: login_id, password: password }, { withCredentials: true })
+  }
+  
   isTokenExpired(token: string): boolean {
     // const expiry = this.decodeToken(token).exp;
     // console.log("IS Token Expired : "+expiry)
@@ -103,7 +109,7 @@ export class AuthService {
     this.cookieService.delete('token');
     this.cookieService.delete('login_id');
     this.cookieService.delete('role');
-    console.log("This is My Tocken After Logout : "+ this.cookieService.get('token'))
+    console.log("This is My Token After Logout : "+ this.cookieService.get('token'))
 
     
     this.router.navigate(['/login']);
@@ -124,12 +130,35 @@ export class AuthService {
         break;
     }
   }
+
+extractCookieValue(cookieName: string): string | null {
+  const cookies = document.cookie.split(';');
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i].trim();
+    if (cookie.startsWith(cookieName + '=')) {
+      return cookie.substring(cookieName.length + 1);
+    }
+  }
+  return null;
 }
 
+getTokenForHeader(){
+  const cookieValue = this.extractCookieValue('authorization');
+
+  const headers = {
+    'Content-Type': 'application/json',
+    'authorization': cookieValue // Sending the cookie value as a header
+  };
+
+  return headers;
+}
+
+}
 
 interface DecodedToken extends JwtPayload {
   sub: string;
   role: string;
   exp: number;
+  user_id: number;
 }
 

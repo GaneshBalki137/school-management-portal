@@ -1,5 +1,5 @@
-/Users/apple/Desktop/smp/school-management-portal/smp-backend/rust-api/target/debug/build/parking_lot_core-ac0e9d0ff486a95d/build_script_build-ac0e9d0ff486a95d: /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.8.6/build.rs
+/Users/apple/Desktop/smp_project/school-management-portal/smp-backend/rust-api/target/debug/build/parking_lot_core-ac0e9d0ff486a95d/build_script_build-ac0e9d0ff486a95d: /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.8.6/build.rs
 
-/Users/apple/Desktop/smp/school-management-portal/smp-backend/rust-api/target/debug/build/parking_lot_core-ac0e9d0ff486a95d/build_script_build-ac0e9d0ff486a95d.d: /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.8.6/build.rs
+/Users/apple/Desktop/smp_project/school-management-portal/smp-backend/rust-api/target/debug/build/parking_lot_core-ac0e9d0ff486a95d/build_script_build-ac0e9d0ff486a95d.d: /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.8.6/build.rs
 
 /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/parking_lot_core-0.8.6/build.rs:

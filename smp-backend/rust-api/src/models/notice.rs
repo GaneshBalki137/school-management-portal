@@ -3,9 +3,9 @@ use sqlx::FromRow;
 
 #[derive(Debug, Serialize, Deserialize, FromRow)]
 pub struct Notice {
-    notice_id: i32,
-    title: Option<String>,
-    content: Option<String>,
-    publish_date: Option<String>,
-    expiry_date: Option<String>
+    pub notice_id: i32,
+    pub title: Option<String>,
+    pub content: Option<String>,
+    pub publish_date: Option<String>,
+    pub expiry_date: Option<String>
 }

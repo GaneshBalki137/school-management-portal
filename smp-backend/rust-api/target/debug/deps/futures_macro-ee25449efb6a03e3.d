@@ -1,0 +1,9 @@
+/Users/apple/Desktop/smp_project/school-management-portal/smp-backend/rust-api/target/debug/deps/libfutures_macro-ee25449efb6a03e3.dylib: /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.30/src/lib.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.30/src/executor.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.30/src/join.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.30/src/select.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.30/src/stream_select.rs
+
+/Users/apple/Desktop/smp_project/school-management-portal/smp-backend/rust-api/target/debug/deps/futures_macro-ee25449efb6a03e3.d: /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.30/src/lib.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.30/src/executor.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.30/src/join.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.30/src/select.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.30/src/stream_select.rs
+
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.30/src/lib.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.30/src/executor.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.30/src/join.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.30/src/select.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/futures-macro-0.3.30/src/stream_select.rs:

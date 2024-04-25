@@ -1,0 +1,115 @@
+
+    <!-- Hamburger Icon for toggling sidebar -->
+    <!-- <div class="toggle-btn" id="sidebar-toggle" (click)="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+      </div>
+   -->
+    <!-- Sidebar for Large Screens -->
+    <!-- <div class="sidebar d-none d-lg-block">
+      <nav>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <hr class="divider">
+            <a class="nav-link" routerLink="dashboard" routerLinkActive="active">
+              <i class="fas fa-home"></i>   Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <hr class="divider">
+            <a class="nav-link" routerLink="timetable" routerLinkActive="active">
+              <i class="fas fa-calendar"></i>   Timetable
+            </a>
+          </li>
+          <li class="nav-item">
+            <hr class="divider">
+            <a class="nav-link" routerLink="attendance" routerLinkActive="active">
+              <i class="fas fa-user-check"></i>   Attendance
+            </a>
+          </li>
+          <li class="nav-item">
+            <hr class="divider">
+            <a class="nav-link" routerLink="academics" routerLinkActive="active">
+              <i class="fas fa-graduation-cap"></i>   Academics
+            </a>
+          </li>
+          <li class="nav-item">
+            <hr class="divider">
+            <a class="nav-link" routerLink="official/notices" routerLinkActive="active">
+              <i class="fas fa-bullhorn"></i>   Notice Board
+            </a>
+          </li>
+          <li class="nav-item">
+            <hr class="divider">
+            <a class="nav-link"  (click)="handleLogOut()" style="cursor: pointer;">
+              <i class="fas fa-sign-out-alt "></i>   Logout
+            </a>
+            <hr class="divider">
+          </li>
+        </ul>
+        
+      </nav>
+  
+      
+    </div>
+  
+
+    <div class="sidebar-small d-lg-none">
+        <nav>
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <hr class="divider">
+                <a class="nav-link" routerLink="dashboard" routerLinkActive="active">
+                  <i class="fas fa-home"></i>   Dashboard
+                </a>
+              </li>
+              <li class="nav-item">
+                <hr class="divider">
+                <a class="nav-link" routerLink="timetable" routerLinkActive="active">
+                  <i class="fas fa-calendar"></i>   Timetable
+                </a>
+              </li>
+              <li class="nav-item">
+                <hr class="divider">
+                <a class="nav-link" routerLink="student/show/attendance" routerLinkActive="active">
+                  <i class="fas fa-user-check"></i>   Attendance
+                </a>
+              </li>
+              <li class="nav-item">
+                <hr class="divider">
+                <a class="nav-link" routerLink="students/academics" routerLinkActive="active">
+                  <i class="fas fa-graduation-cap"></i>   Academics
+                </a>
+              </li>
+              <li class="nav-item">
+                <hr class="divider">
+                <a class="nav-link" routerLink="official/main/notice-board" routerLinkActive="active">
+                  <i class="fas fa-bullhorn"></i>   Notice Board
+                </a>
+              </li>
+              <li class="nav-item">
+                <hr class="divider">
+                <a class="nav-link"  (click)="handleLogOut()" style="cursor: pointer;">
+                  <i class="fas fa-sign-out-alt "></i>   Logout
+                </a>
+                <hr class="divider">
+              </li>
+            </ul>
+            
+          </nav>
+    </div>
+  
+    
+    
+    <div class="content-area">
+      
+      <div class="container-fluid">
+        
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  
+  
+   -->
+
+   <app-sidebar></app-sidebar>
+   <router-outlet></router-outlet>

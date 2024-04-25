@@ -1,17 +1,11 @@
 
-    <!-- Hamburger Icon for toggling sidebar -->
-    <div class="toggle-btn" id="sidebar-toggle" (click)="toggleSidebar()">
-        <i class="fas fa-bars"></i>
-      </div>
-  
-    <!-- Sidebar for Large Screens -->
-    <div class="sidebar d-none d-lg-block">
+    <!-- <div class="sidebar d-none d-lg-block">
       <nav>
         <ul class="nav flex-column">
           <li class="nav-item">
             <hr class="divider">
             <a class="nav-link" routerLink="dashboard" routerLinkActive="active">
-              <i class="fas fa-home"></i>  Dashboard
+              <i class="fas fa-home"></i> Dashboard
             </a>
           </li>
           <li class="nav-item">
@@ -28,19 +22,31 @@
           </li>
           <li class="nav-item">
             <hr class="divider">
-            <a class="nav-link" routerLink="students/add/grades" routerLinkActive="active">
+            <a class="nav-link" routerLink="schedule" routerLinkActive="active">
               <i class="fas fa-calendar"></i> Schedule
             </a>
           </li>
           <li class="nav-item">
             <hr class="divider">
-            <a class="nav-link" routerLink="official/main/notice-board" routerLinkActive="active">
+            <a class="nav-link" routerLink="academic_details" routerLinkActive="active">
+              <i class="fas fa-book"></i> Academic Details
+            </a>
+          </li>
+          <li class="nav-item">
+            <hr class="divider">
+            <a class="nav-link" routerLink="subjects_allocation" routerLinkActive="active">
+              <i class="fas fa-chalkboard"></i> Subjects
+            </a>
+          </li>
+          <li class="nav-item">
+            <hr class="divider">
+            <a class="nav-link" routerLink="notice" routerLinkActive="active">
               <i class="fas fa-bullhorn"></i> Notice Board
             </a>
           </li>
           <li class="nav-item">
             <hr class="divider">
-            <a class="nav-link" routerLink="students/attendance" (click)="handleLogOut()">
+            <a class="nav-link" routerLink="/add_path" (click)="handleLogOut()">
               <i class="fas fa-sign-out-alt "></i> Logout
             </a>
             <hr class="divider">
@@ -52,7 +58,7 @@
       
     </div>
   
-    <!-- Sidebar for Small Screens -->
+    
     <div class="sidebar-small d-lg-none">
       <nav>
         <ul class="nav flex-column">
@@ -95,23 +101,18 @@
           </li>
         </ul>
       </nav>
-    </div>
+    </div> -->
   
     <!-- Content area -->
-    <div class="content-header content-area row" style="height: fit-content; background-color:#01427a">
+    <!-- <div class="content-header content-area row" style="height: fit-content; background-color:#01427a">
       <h2 class="col-10">Welcome to the School Management Portal</h2>
       <h6 class="col-2">Academic Year : {{ currentYear }}</h6>
       
-    </div>
+    </div> -->
     
-    
-    <div class="content-area">
-      
-      <div class="container-fluid">
-        
-        <router-outlet></router-outlet>
-      </div>
-    </div>
   
+        <app-sidebar></app-sidebar>
+        <router-outlet></router-outlet>
+    
   
   

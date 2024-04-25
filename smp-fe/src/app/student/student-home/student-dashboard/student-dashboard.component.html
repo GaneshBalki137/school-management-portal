@@ -1,0 +1,98 @@
+<main id="main" class="main">
+    <div class="row">
+        <!-- upcomming lectures  and notices-->
+        <div class="col-lg-7 col-md-12 m-3">
+            <div class="row card">
+                <div class="card-body">
+                    <div class="p card-title">Upcomming Lectures</div>
+                    <div *ngIf="todaysScedule.length>0; else notime">
+                        <div class="border" *ngFor="let lecture of todaysScedule">
+                            <ng-container *ngIf="lecture.start_time >= current_hour">
+                                <div class="col">
+                                    <h5 class="card-title">{{ lecture.subject_name }}</h5>
+                                    <p class="card-text">Time: {{ lecture.start_time }}:00 </p>
+                                </div>
+                                <div *ngIf="lecture.start_time===current_hour" class="col text-right">
+                                    <h5 style="color: #007bff;">Ongoing Class</h5>
+                                </div>
+                            </ng-container>
+                        </div>
+                    
+                    </div>
+                    
+                    <ng-template #notime>
+                      <p>No upcoming lectures.</p>
+                    </ng-template>
+                      
+                </div>
+                
+                  
+            </div>
+            <div class="row card">
+                <div class="card-body">
+                    <p class="card-title">Recent Updates</p>
+                    
+                        
+                        <!-- add for loop to this div -->
+                        <ng-container *ngIf="notices && notices.length > 0; else nonotice">
+                            <div class="media text-muted" *ngFor="let notice of notices.slice(0,3); let i = index">
+                                <ng-container *ngIf="!isNoticeExpired(notice.expiry_date)">
+                                    <div class="mr-2 rounded-circle text-white"
+                                        style="width: 32px; height: 32px; line-height: 32px; text-align: center; background-color:#e14177">
+                                        {{ notice.publish_date | slice:-2 }}</div>
+                                    <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                        <h6 class="mb-2">{{ notice.title }}</h6>
+                                        <div class="text-gray-dark">Date: {{ notice.publish_date }}</div>
+                                        <p>
+                                            {{ notice.content }}
+                                        </p>
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <small class="d-block text-right mt-3">
+                                <a routerLink="/student/official/notices">All messages</a>
+                            </small>
+                        </ng-container>
+                        <ng-template #nonotice>
+                                  <div class="text-center text-muted">
+                                    No Updates
+                                  </div>
+                        </ng-template>
+                        
+                   
+               
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- semester wise performance -->
+        <div class="col-lg-4 col-md-12  m-3 "> 
+         <div class="card  grade-graph-container">
+               
+                    <div class="filter text-right mr-2">
+                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                            <li class="dropdown-header text-start">
+                                <h6>Filter</h6>
+                            </li>
+                    
+                            <li><a class="dropdown-item" (click)="fetchData(1)">Semester 1</a></li>
+                            <li><a class="dropdown-item" (click)="fetchData(2)">Semester 2</a></li>
+                        </ul>
+                     </div>
+                     <div class="card-body pt-0">
+                        <h4 class="card-title">Progress <span>/ Semester <span>/ {{selectedSemester}}</span></span></h4>
+                        <canvas id="chart-options-example1"></canvas>
+                     </div>
+                   
+              
+           </div>
+
+            <!-- <div class="card grade-graph-container">
+                <div class="card-body">
+                    </div>
+                    </div> -->
+        </div>
+    </div>
+</main>

@@ -1,1 +1,66 @@
-<p>DASHBOARD</p>
+<main id="main" class="main">
+   <div class="row">
+    <!-- <div class="col-12"> -->
+        <div class="row">
+            <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6" style="padding: 1%;">
+                    <div class="shadow dashboard-card" style="background-color: #6761DA;">
+                        <div class="row">
+                            <!-- First child div on the left side -->
+                            <div class="col-6 align-self-center text-center">
+                                <h5 >Total Students</h5>
+                                <p>{{ studentCount }}</p>
+                            </div>
+                            <!-- Second child div on the right side -->
+                            <div class="col-6 align-self-center text-center">
+                                <i class="fas fa-user-graduate" style="font-size: 35px; color: #EB9F2F;;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" style="padding: 1%;">
+                    <div class="shadow dashboard-card " style="background-color: #D24C4C;">
+            
+                        <div class="row">
+                            <!-- First child div on the left side -->
+                            <div class="col-6 align-self-center text-center">
+                                <h5>Total Teachers</h5>
+                                <p>{{ teacherCount }}</p>
+                            </div>
+                            <!-- Second child div on the right side -->
+                            <div class="col-6 align-self-center text-center">
+                                <i class="fas fa-chalkboard-teacher" style="font-size: 35px; color: #007bff;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+            <app-admissions-graph></app-admissions-graph>
+            </div>
+
+            <p class="card-title" style="color: #3B71CA; white-space: pre-wrap;">    Notice</p>
+            <div>
+                <div class="media text-muted pt-3" *ngFor="let notice of notices;let i = index">
+                    <ng-container *ngIf="!isNoticeExpired(notice.expiry_date)">
+                        <div class="mr-2 rounded-circle  text-white"
+                            style="width: 32px; height: 32px; line-height: 32px; text-align: center; background-color:#14A44D">
+                            {{notice.publish_date | slice:-2}}</div>
+                        <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                            <h6 class="mb-2">{{notice.title}}</h6>
+                            <div class="text-gray-dark">Date: {{notice.publish_date}}</div>
+                            <p>
+                                {{notice.content}}
+                            </p>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    <!-- </div> -->
+   </div>
+</main>

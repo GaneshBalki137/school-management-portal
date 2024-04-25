@@ -1,0 +1,36 @@
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    background-color: #f8f9fa;
+}
+
+.card h5 {
+    color: #495057;
+}
+
+.card p {
+    margin-bottom: 0;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card-container .card {
+    margin-bottom: 20px;
+    width: 30%;
+}
+
+.card-container .card h4 {
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.shadow{
+    
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the values as needed */
+    
+}

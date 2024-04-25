@@ -1,0 +1,14 @@
+.active-class{
+    border: 2px solid skyblue;
+}
+
+.schedule {
+    border: none;
+}
+.dashboard-card {
+    padding: 15px; 
+    height: 130px; 
+    border-radius: 5px;
+    border: none;
+    color: azure;
+}

@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { TeacherDashboardComponent } from "./teacher-home/teacher-dashboard/teacher-dashboard.component";
 import { TeacherHomeComponent } from "./teacher-home/teacher-home.component";
-import { TeacherAttendenceComponent } from "./teacher-home/teacher-attendence/teacher-attendence.component";
 import { TeacherScheduleComponent } from "./teacher-home/teacher-schedule/teacher-schedule.component";
 import { MarkAttendenceComponent } from "./teacher-home/mark-attendence/mark-attendence.component";
 import { AddGradesComponent } from "./teacher-home/add-grades/add-grades.component";

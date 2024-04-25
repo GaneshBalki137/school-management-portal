@@ -1,0 +1,10 @@
+/Users/apple/Desktop/smp_project/school-management-portal/smp-backend/rust-api/target/debug/deps/libtokio_tungstenite-8bab923dd5ea1c4c.rmeta: /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-tungstenite-0.21.0/src/lib.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-tungstenite-0.21.0/src/compat.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-tungstenite-0.21.0/src/connect.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-tungstenite-0.21.0/src/handshake.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-tungstenite-0.21.0/src/stream.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-tungstenite-0.21.0/src/tls.rs
+
+/Users/apple/Desktop/smp_project/school-management-portal/smp-backend/rust-api/target/debug/deps/tokio_tungstenite-8bab923dd5ea1c4c.d: /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-tungstenite-0.21.0/src/lib.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-tungstenite-0.21.0/src/compat.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-tungstenite-0.21.0/src/connect.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-tungstenite-0.21.0/src/handshake.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-tungstenite-0.21.0/src/stream.rs /Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-tungstenite-0.21.0/src/tls.rs
+
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-tungstenite-0.21.0/src/lib.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-tungstenite-0.21.0/src/compat.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-tungstenite-0.21.0/src/connect.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-tungstenite-0.21.0/src/handshake.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-tungstenite-0.21.0/src/stream.rs:
+/Users/apple/.cargo/registry/src/index.crates.io-6f17d22bba15001f/tokio-tungstenite-0.21.0/src/tls.rs:

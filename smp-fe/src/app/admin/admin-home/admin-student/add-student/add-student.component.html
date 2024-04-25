@@ -1,0 +1,43 @@
+<form>
+    <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input type="text" class="form-control" id="firstName" [(ngModel)]="firstName" name="firstName">
+    </div>
+    <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" class="form-control" id="lastName" [(ngModel)]="lastName" name="lastName">
+      </div>
+      <div class="form-group">
+        <label for="dateOfBirth">Date of Birth</label>
+        <input type="date" class="form-control" id="dateOfBirth" [(ngModel)]="dateOfBirth" name="dateOfBirth">
+      </div>
+      <div class="form-group">
+        <label for="gender">Gender</label>
+        <input type="text" class="form-control" id="gender" [(ngModel)]="gender" name="gender">
+      </div>
+      <div class="form-group">
+        <label for="address">Address</label>
+        <input type="text" class="form-control" id="address" [(ngModel)]="address" name="address">
+      </div>
+      <div class="form-group">
+        <label for="phoneNumber">Mobile</label>
+        <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="phoneNumber" name="phoneNumber">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" id="email" [(ngModel)]="email" name="=email">
+      </div>
+      <div class="form-group">
+        <label for="className">Class </label>
+        <!-- <input type="number" class="form-control" id="className" #className value="{{ temp_class_id }}"> -->
+        <input type="number" class="form-control" id="className" [(ngModel)]="className" name="className">
+
+      </div>
+      <div class="form-group">
+        <label for="addmissionDate">Admission Date</label>
+        <input type="date" class="form-control" id="addmissionDate" [(ngModel)]="addmissionDate" name="addmissionDate">
+      </div>
+      <button class="btn btn-success" type="submit" (click)="addStudent()">
+        Submit
+      </button>
+</form>

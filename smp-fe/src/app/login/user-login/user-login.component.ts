@@ -13,13 +13,12 @@ export class UserLoginComponent implements OnInit {
   login_id: string;
   password: string;
   loading: boolean = false;
-  role: string = '';
-
-  session_login_id: string;
-  session_role: string;
+  role: string = 'teacher'
 
   errorMessage: string = '';
   showPassword: boolean = false;
+  forgotPassword: boolean = false;
+  confirmPassword: string = '';
 
   constructor(private authService: AuthService, private router: Router, private loginService: LogInService) { }
 
@@ -37,18 +36,17 @@ export class UserLoginComponent implements OnInit {
     this.loading = true;
 
     try {
+      // service fun userLogin() verify login_id and pw and send back the token
       const data: any = await this.authService.userlogin(this.login_id, this.password).toPromise();
       const token = data.token;
       const jwtPayload = this.authService.decodeToken(token);
 
       const role = jwtPayload.role;
-      this.authService.storeToken(token, jwtPayload.sub, role);
+      this.authService.storeToken(token, jwtPayload.sub, role, jwtPayload.user_id);
       this.authService.redirectBasedOnRole(role);
     } catch (error) {
       console.error(error);
-      this.errorMessage = 'Invalid username or password';
-      // Handle login error
-      //alert('Login Failed');
+      this.errorMessage = 'Invalid username or password'; 
     } finally {
       this.loading = false;
     }
@@ -56,5 +54,29 @@ export class UserLoginComponent implements OnInit {
 
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
+  }
+  toggleForgotPassword(){
+    this.forgotPassword=!this.forgotPassword;
+  }
+
+  handleChnagePassword(){
+  
+    if(this.password==this.confirmPassword){
+      this.authService.changePassword(this.login_id,this.password).subscribe(
+        (data) => {
+          console.log(data);
+          this.password=''
+          this.forgotPassword=false;
+
+        },
+        (error) => {
+          console.log(error);
+          this.errorMessage = 'Invalid username or password';
+        }
+      )
+
+    }else{
+      this.errorMessage = 'match the password';
+    }
   }
 }
