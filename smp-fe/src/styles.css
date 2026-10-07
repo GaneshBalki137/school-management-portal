@@ -327,13 +327,26 @@ code {
   max-width: 1280px;
   margin: 0 auto;
   padding: 1.75rem 2rem 4rem;
+}
+
+.content:focus {
+  outline: none;
+}
+
+/* Each routed page is one host element; space its sections evenly. */
+.content > :not(router-outlet) {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
 }
 
-.content:focus {
-  outline: none;
+/* Hosts that render nothing must not add an empty gap. */
+app-load-state:empty {
+  display: none;
+}
+
+app-dialog {
+  display: contents;
 }
 
 .backdrop {
@@ -697,6 +710,12 @@ input[type='radio'] {
   width: auto;
 }
 
+/* Filters placed in a card heading keep normal text weight. */
+h2 .field.inline {
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
 .form-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1031,11 +1050,11 @@ a.avatar:hover {
   background: var(--tone-soft);
   color: var(--text);
   border: 1px solid color-mix(in srgb, var(--tone) 30%, transparent);
-  margin-bottom: 0.9rem;
 }
 
-.content > .alert {
-  margin: 0;
+form .alert,
+.card .alert {
+  margin-bottom: 0.9rem;
 }
 
 .alert > .bi {

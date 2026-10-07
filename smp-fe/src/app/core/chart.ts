@@ -1,5 +1,6 @@
 import { afterRenderEffect, Component, DestroyRef, ElementRef, inject, input, viewChild } from '@angular/core';
 import { Chart, ChartConfiguration, registerables } from 'chart.js';
+import { clone } from 'chart.js/helpers';
 import { Theme } from './ui';
 
 Chart.register(...registerables);
@@ -26,7 +27,8 @@ export class ChartView {
       Chart.defaults.font.family = css.getPropertyValue('--font').trim();
       Chart.defaults.maintainAspectRatio = false;
       this.chart?.destroy();
-      this.chart = new Chart(this.canvas().nativeElement, this.config());
+      // Chart.js writes resolved theme colours back into the config it is given, so hand it a fresh copy each time.
+      this.chart = new Chart(this.canvas().nativeElement, clone(this.config()));
     });
     inject(DestroyRef).onDestroy(() => this.chart?.destroy());
   }
