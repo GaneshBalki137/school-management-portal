@@ -1,110 +1,142 @@
-use actix_web::web::get;
-use actix_web::{web, App, HttpServer, Responder, middleware::Logger};
-use actix_cors::Cors;
-use actix_web::http::header;
-//use handlers::admin::add_notice; // Import the header module
-use crate::handlers::student_handler::{add_student,get_total_count,add_teacher};
-mod middleware;
-use middleware::require_authentication::AuthenticationMiddleware;
-mod handlers;
-// use handlers::auth_handler::{login, establish_connection}; 
-use crate::handlers::auth_handler::{user_login,change_password};
+mod admin;
+mod auth;
+mod error;
+mod shared;
+mod student;
+mod teacher;
 
+use actix_web::middleware::{DefaultHeaders, Logger};
+use actix_web::web::{delete, get, post, put};
+use actix_web::{web, App, HttpResponse, HttpServer};
+use error::{ApiResult, AppError};
+use sqlx::postgres::PgPoolOptions;
 use sqlx::PgPool;
-use crate::handlers::admin::{add_student_details,get_all_students,update_student,delete_student,
-                             add_teacher_details,get_all_teachers,update_teacher,delete_teacher,
-                             get_all_notices,add_notice,delete_notice,
-                             get_student_grades,get_subjects_by_class_id,get_teacher_by_sub_id,
-                             get_teacher_by_subject_name,get_subject_details,add_subject_details,
-                             add_schedule,total_admissions_report_for_each_year,get_class_grades
-                            //  get_subject_name,
-                            };
-use crate::handlers::shared::{get_notices};
-use crate::handlers::teacher::{get_timetable,get_subjects,get_students_by_class,submit_attendance,get_teacher_schedule,
-                             get_timetable_by_day_hour,get_grades_for_subject_semester_student,add_grade,update_grade,get_total_classes_for_teacher};
-use crate::handlers::student::{get_student_by_class,get_grades_of_sem,get_attendance_for_student,get_todays_lectures,
-                             get_timetable_for_student};
-// use crate::handlers::shared::{get_notices};
-mod models;
+use std::{env, time::Duration};
+
+pub struct AppState {
+    pub db: PgPool,
+    pub jwt_secret: String,
+    pub cookie_secure: bool,
+    pub limiter: auth::Limiter,
+}
+
+fn required_env(name: &str) -> String {
+    env::var(name).unwrap_or_else(|_| panic!("{name} is not set. Copy .env.example to .env and fill it in."))
+}
+
+fn bad_input(e: impl std::fmt::Display) -> actix_web::Error {
+    AppError::BadRequest(format!("Invalid request: {e}")).into()
+}
+
+async fn health(st: shared::Db) -> ApiResult<HttpResponse> {
+    sqlx::query("SELECT 1").execute(&st.db).await?;
+    Ok(HttpResponse::Ok().json(serde_json::json!({ "status": "ok" })))
+}
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    let pool = PgPool::connect("postgres://postgres:hash@localhost/smp_db").await.unwrap();
-    
+    dotenvy::dotenv().ok();
+    env_logger::init_from_env(env_logger::Env::default().default_filter_or("info"));
+
+    let jwt_secret = required_env("JWT_SECRET");
+    assert!(jwt_secret.len() >= 32, "JWT_SECRET must be at least 32 characters (try: openssl rand -hex 32)");
+    // "Today" in SQL (CURRENT_DATE) must be the school's date, not UTC's.
+    let timezone = env::var("SCHOOL_TIMEZONE").unwrap_or_else(|_| "UTC".into());
+    let db = PgPoolOptions::new()
+        .max_connections(10)
+        .acquire_timeout(Duration::from_secs(5))
+        .after_connect(move |conn, _| {
+            let timezone = timezone.clone();
+            Box::pin(async move {
+                sqlx::query("SELECT set_config('TimeZone', $1, false)").bind(timezone).execute(conn).await?;
+                Ok(())
+            })
+        })
+        .connect(&required_env("DATABASE_URL"))
+        .await
+        .expect("Could not connect to Postgres. Is it running, and is DATABASE_URL correct?");
+    sqlx::migrate!().run(&db).await.expect("Database migration failed");
+    if let Err(e) = auth::ensure_admin(&db).await {
+        panic!("Could not create the admin account: {e}");
+    }
+
+    let state = web::Data::new(AppState {
+        db,
+        jwt_secret,
+        cookie_secure: env::var("COOKIE_SECURE").map_or(true, |v| v != "false"),
+        limiter: auth::Limiter::default(),
+    });
+    let bind = env::var("BIND_ADDR").unwrap_or_else(|_| "127.0.0.1:3000".into());
+    log::info!("API listening on http://{bind}");
+
     HttpServer::new(move || {
-        let cors = Cors::default()
-            .allow_any_origin()
-            .allowed_methods(vec!["GET", "POST", "DELETE", "PUT"])
-            .allowed_headers(vec![header::AUTHORIZATION, header::ACCEPT, header::CONTENT_TYPE])
-            .supports_credentials();// Allow credentials (cookies) to be sent with requests
-            
-
         App::new()
-            .wrap(AuthenticationMiddleware)
-            .wrap(cors)
-            .wrap(Logger::default())
-            .app_data(web::Data::new(pool.clone())) // Use app_data instead of data
-            .service(web::resource("/login").route(web::post().to(user_login)))
-            .service(web::resource("/change_password").route(web::put().to(change_password)))
-            // ADMIN
-            .service(web::resource("/add_student").route(web::post().to(add_student))) // student_handler
-            .service(web::resource("/get_total_count").route(web::get().to(get_total_count)))
-            .service(web::resource("/add_teacher").route(web::post().to(add_teacher)))
-
-            .service(web::resource("/add_student_details").route(web::post().to(add_student_details))) // admin_handler
-            .service(web::resource("/get_all_students/{class_id}").route(web::get().to(get_all_students)))
-            .service(web::resource("/update_student/{student_id}").route(web::put().to(update_student)))
-            .service(web::resource("/delete_student/{student_id}/{class_id}").route(web::delete().to(delete_student)))
-
-            .service(web::resource("/add_teacher_details").route(web::post().to(add_teacher_details)))
-            .service(web::resource("/get_all_teachers").route(web::get().to(get_all_teachers)))
-            .service(web::resource("/update_teacher/{teacher_id}").route(web::put().to(update_teacher)))
-            .service(web::resource("/delete_teacher/{teacher_id}").route(web::delete().to(delete_teacher)))
-
-            .service(web::resource("/get_all_notices").route(web::get().to(get_all_notices)))
-            .service(web::resource("/add_notice").route(web::post().to(add_notice)))
-            .service(web::resource("/delete_notice/{notice_id}").route(web::delete().to(delete_notice)))
-
-            .service(web::resource("/get_student_grades/{student_id}").route(web::get().to(get_student_grades)))
-            // .service(web::resource("/get_subject_name/{subject_id}").route(web::get().to(get_subject_name)))
-
-            .service(web::resource("/get_subjects_by_class_id/{class_id}").route(web::get().to(get_subjects_by_class_id)))
-            .service(web::resource("/get_teacher_by_subject_name/{subject_name}").route(web::get().to(get_teacher_by_subject_name)))
-            .service(web::resource("/get_teacher_by_sub_id/{subject_id}").route(web::get().to(get_teacher_by_sub_id)))
-            .service(web::resource("/get_subject_details").route(web::get().to(get_subject_details)))
-            .service(web::resource("/add_subject_details").route(web::post().to(add_subject_details)))
-
-            .service(web::resource("/add_schedule").route(web::post().to(add_schedule)))
-            .service(web::resource("/total_admissions_report_for_each_year").route(web::get().to(total_admissions_report_for_each_year)))
-            .service(web::resource("/get_class_grades").route(web::get().to(get_class_grades)))
-
-            // STUDENT
-            .service(web::resource("/get/all/notices").route(web::get().to(get_notices)))
-
-
-            .service(web::resource("/get_timetable/{teacher_id}/{day_of_week}").route(web::get().to(get_timetable)))
-            .service(web::resource("/get/student-by/class/{class_id}").route(web::get().to(get_student_by_class)))
-            .service(web::resource("/get_subjects/{teacher_id}").route(web::get().to(get_subjects)))
-            .service(web::resource("/students/{class_id}").route(web::get().to(get_students_by_class)))
-
-            .service(web::resource("/submit/attendance/{subject_id}").route(web::post().to(submit_attendance)))
-            .service(web::resource("/get_teacher_schedule/{teacher_id}").route(web::get().to(get_teacher_schedule)))
-            .service(web::resource("/get_timetable_by_day_hour/{teacher_id}/{day_of_week}/{current_hour}").route(web::get().to(get_timetable_by_day_hour)))
-
-            .service(web::resource("/get_grades_for_subject_semester_student/{subject_id}/{student_id}/{semester}").route(web::get().to(get_grades_for_subject_semester_student)))
-            .service(web::resource("/add/grade").route(web::post().to(add_grade)))
-            .service(web::resource("/update/grade").route(web::put().to(update_grade)))
-
-            
-            .service(web::resource("/get_timetable_for_student/{student_id}").route(web::get().to(get_timetable_for_student)))
-            //for student - to display grades for subject of specified semester
-            .service(web::resource("/get_grades_of_sem/{student_id}/{semester}").route(web::get().to(get_grades_of_sem)))
-            .service(web::resource("/get_attendance_for_student/{student_id}").route(web::get().to(get_attendance_for_student)))
-            .service(web::resource("/get_todays_lectures/{student_id}/{day_of_week}").route(web::get().to(get_todays_lectures)))
-            .service(web::resource("/get_total_classes_for_teacher/{teacher_id}").route(web::get().to(get_total_classes_for_teacher)))
-
+            .app_data(state.clone())
+            .app_data(web::JsonConfig::default().limit(256 * 1024).error_handler(|e, _| bad_input(e)))
+            .app_data(web::QueryConfig::default().error_handler(|e, _| bad_input(e)))
+            .app_data(web::PathConfig::default().error_handler(|e, _| bad_input(e)))
+            .wrap(
+                DefaultHeaders::new()
+                    .add(("Cache-Control", "no-store"))
+                    .add(("X-Content-Type-Options", "nosniff"))
+                    .add(("X-Frame-Options", "DENY"))
+                    .add(("Referrer-Policy", "no-referrer")),
+            )
+            .wrap(Logger::new("%a \"%r\" %s %Dms"))
+            .service(
+                web::scope("/api")
+                    .route("/health", get().to(health))
+                    .route("/auth/login", post().to(auth::login))
+                    .route("/auth/logout", post().to(auth::logout))
+                    .route("/auth/me", get().to(auth::me))
+                    .route("/auth/password", put().to(auth::change_password))
+                    .route("/notices", get().to(shared::notices))
+                    .service(
+                        web::scope("/admin")
+                            .route("/dashboard", get().to(admin::dashboard))
+                            .route("/students", get().to(admin::list_students))
+                            .route("/students", post().to(admin::create_student))
+                            .route("/students/{id}", put().to(admin::update_student))
+                            .route("/students/{id}", delete().to(admin::delete_student))
+                            .route("/students/{id}/report", get().to(admin::student_report))
+                            .route("/teachers", get().to(admin::list_teachers))
+                            .route("/teachers", post().to(admin::create_teacher))
+                            .route("/teachers/{id}", put().to(admin::update_teacher))
+                            .route("/teachers/{id}", delete().to(admin::delete_teacher))
+                            .route("/{kind}/{id}/reset-password", post().to(auth::reset_password))
+                            .route("/subjects", get().to(admin::list_subjects))
+                            .route("/subjects", post().to(admin::create_subject))
+                            .route("/subjects/{id}", put().to(admin::update_subject))
+                            .route("/subjects/{id}", delete().to(admin::delete_subject))
+                            .route("/timetable", get().to(admin::timetable))
+                            .route("/timetable", put().to(admin::set_slot))
+                            .route("/timetable/{id}", delete().to(admin::clear_slot))
+                            .route("/notices", get().to(admin::list_notices))
+                            .route("/notices", post().to(admin::create_notice))
+                            .route("/notices/{id}", put().to(admin::update_notice))
+                            .route("/notices/{id}", delete().to(admin::delete_notice))
+                            .route("/reports/class", get().to(admin::class_report)),
+                    )
+                    .service(
+                        web::scope("/teacher")
+                            .route("/dashboard", get().to(teacher::dashboard))
+                            .route("/subjects", get().to(teacher::subjects))
+                            .route("/timetable", get().to(teacher::timetable))
+                            .route("/attendance", get().to(teacher::attendance))
+                            .route("/attendance", put().to(teacher::save_attendance))
+                            .route("/grades", get().to(teacher::grades))
+                            .route("/grades", put().to(teacher::save_grades)),
+                    )
+                    .service(
+                        web::scope("/student")
+                            .route("/dashboard", get().to(student::dashboard))
+                            .route("/timetable", get().to(student::timetable))
+                            .route("/attendance", get().to(student::attendance))
+                            .route("/report", get().to(student::report)),
+                    ),
+            )
     })
-    .bind("127.0.0.1:3000")?
+    .bind(bind)?
     .run()
     .await
 }

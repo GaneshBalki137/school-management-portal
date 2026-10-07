@@ -1,0 +1,14 @@
+# Secrets: copy smp-backend/rust-api/.env.example to .env instead
+.env
+
+# Build output
+target/
+node_modules/
+dist/
+.angular/
+venv/
+__pycache__/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
