@@ -4,12 +4,13 @@ import { CanActivateChildFn, CanActivateFn, CanDeactivateFn, Router } from '@ang
 import { catchError, throwError } from 'rxjs';
 import { Api } from './api';
 import { Profile, Role } from './models';
-import { Confirm } from './ui';
+import { Confirm, Theme } from './ui';
 
 /** Who is signed in. The session cookie is httpOnly, so only the server can say; we ask once per page load. */
 @Injectable({ providedIn: 'root' })
 export class Session {
   private api = inject(Api);
+  private theme = inject(Theme);
   readonly user = signal<Profile | null>(null);
   private ready?: Promise<void>;
 
@@ -19,7 +20,9 @@ export class Session {
 
   async refresh(): Promise<void> {
     try {
-      this.user.set(await this.api.get<Profile>('/auth/me'));
+      const user = await this.api.get<Profile>('/auth/me');
+      this.user.set(user);
+      this.theme.use(user);
     } catch {
       this.user.set(null);
     }
@@ -28,6 +31,7 @@ export class Session {
   async login(email: string, password: string): Promise<Profile> {
     const user = await this.api.post<Profile>('/auth/login', { email, password });
     this.user.set(user);
+    this.theme.use(user);
     this.ready = Promise.resolve();
     return user;
   }

@@ -1,10 +1,11 @@
-import { DatePipe } from '@angular/common';
+import { DatePipe, TitleCasePipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { Api, errorText } from '../core/api';
 import { initials } from '../core/format';
 import { homeUrl, Session } from '../core/session';
-import { submitted, Toasts } from '../core/ui';
+import { ACCENTS, ThemeMode } from '../core/models';
+import { submitted, Theme, Toasts } from '../core/ui';
 
 /** Labels for the profile fields worth showing, in display order. */
 const FIELDS: [string, string][] = [
@@ -99,16 +100,50 @@ const FIELDS: [string, string][] = [
             <p class="small muted">Changing your password signs you out on every other device.</p>
           </form>
         </section>
+
+        <section class="card">
+          <h2>Appearance</h2>
+          <p class="small muted">Saved to your account, so it follows you to any device you sign in on.</p>
+          <fieldset>
+            <legend>Mode</legend>
+            <span class="segmented">
+              @for (t of themes; track t.value) {
+                <label>
+                  <input type="radio" name="theme" [value]="t.value" [checked]="theme.mode() === t.value" (change)="theme.choose({ theme: t.value })" />
+                  <span><i class="bi" [class]="t.icon"></i> {{ t.label }}</span>
+                </label>
+              }
+            </span>
+          </fieldset>
+          <fieldset>
+            <legend>Colour</legend>
+            <span class="swatches">
+              @for (a of accents; track a) {
+                <label [attr.data-accent]="a" [title]="a | titlecase">
+                  <input type="radio" name="accent" [value]="a" [checked]="theme.accent() === a" (change)="theme.choose({ accent: a })" [attr.aria-label]="a | titlecase" />
+                </label>
+              }
+              <span class="small muted" aria-hidden="true">{{ theme.accent() | titlecase }}</span>
+            </span>
+          </fieldset>
+        </section>
       </div>
     }
   `,
-  imports: [DatePipe],
+  imports: [DatePipe, TitleCasePipe],
 })
 export default class Account {
   private api = inject(Api);
   private session = inject(Session);
   private router = inject(Router);
   private toasts = inject(Toasts);
+  protected readonly theme = inject(Theme);
+  protected readonly themes: { value: ThemeMode; label: string; icon: string }[] = [
+    { value: 'system', label: 'Match my device', icon: 'bi-circle-half' },
+    { value: 'light', label: 'Light', icon: 'bi-sun' },
+    { value: 'dark', label: 'Dark', icon: 'bi-moon-stars' },
+  ];
+  protected readonly accents = ACCENTS;
   protected readonly user = this.session.user;
   protected readonly busy = signal(false);
   protected readonly error = signal('');

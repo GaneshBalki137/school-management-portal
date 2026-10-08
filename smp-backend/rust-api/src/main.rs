@@ -90,6 +90,7 @@ async fn main() -> std::io::Result<()> {
                     .route("/auth/logout", post().to(auth::logout))
                     .route("/auth/me", get().to(auth::me))
                     .route("/auth/password", put().to(auth::change_password))
+                    .route("/auth/theme", put().to(auth::set_theme))
                     .route("/notices", get().to(shared::notices))
                     .service(
                         web::scope("/admin")

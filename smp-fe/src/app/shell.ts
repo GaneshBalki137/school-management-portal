@@ -85,7 +85,7 @@ const ROLE_LABEL: Record<Role, string> = { admin: 'School office', teacher: 'Tea
           <button
             type="button"
             class="icon-btn"
-            (click)="theme.toggle()"
+            (click)="theme.choose({ theme: theme.dark() ? 'light' : 'dark' })"
             [attr.aria-label]="theme.dark() ? 'Switch to light theme' : 'Switch to dark theme'"
             [title]="theme.dark() ? 'Light theme' : 'Dark theme'"
           >

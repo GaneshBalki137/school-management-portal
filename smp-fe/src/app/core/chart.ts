@@ -34,5 +34,5 @@ export class ChartView {
   }
 }
 
-/** Brand colours for chart datasets; they read well on both light and dark backgrounds. */
-export const CHART_COLORS = { primary: '#6366f1', teal: '#14b8a6', amber: '#f59e0b' };
+/** Colours for chart datasets that read well on both light and dark backgrounds (the palette colour is Theme.primary). */
+export const CHART_COLORS = { teal: '#14b8a6', amber: '#f59e0b' };

@@ -233,7 +233,7 @@ async fn profile(db: &PgPool, account_id: i32) -> ApiResult<Value> {
     Ok(sqlx::query_scalar(
         "SELECT json_build_object(
             'account_id', a.account_id, 'email', a.email, 'role', a.role,
-            'must_change_password', a.must_change_password, 'last_login_at', a.last_login_at,
+            'must_change_password', a.must_change_password, 'last_login_at', a.last_login_at, 'theme', a.theme, 'accent', a.accent,
             'name', coalesce(s.first_name || ' ' || s.last_name, t.first_name || ' ' || t.last_name, 'Administrator'),
             'student_id', a.student_id, 'teacher_id', a.teacher_id, 'class_id', s.class_id,
             'details', coalesce(to_jsonb(s), to_jsonb(t)))
@@ -288,6 +288,23 @@ pub async fn logout() -> HttpResponse {
 
 pub async fn me(st: web::Data<AppState>, user: User) -> ApiResult<web::Json<Value>> {
     Ok(web::Json(profile(&st.db, user.account_id).await?))
+}
+
+#[derive(Deserialize)]
+pub struct ThemeBody {
+    theme: String,
+    accent: String,
+}
+
+/// Remembers the person's light/dark theme and colour palette on their account (the schema checks both values).
+pub async fn set_theme(st: web::Data<AppState>, user: User, body: web::Json<ThemeBody>) -> ApiResult<HttpResponse> {
+    sqlx::query("UPDATE accounts SET theme = $1, accent = $2 WHERE account_id = $3")
+        .bind(&body.theme)
+        .bind(&body.accent)
+        .bind(user.account_id)
+        .execute(&st.db)
+        .await?;
+    Ok(HttpResponse::NoContent().finish())
 }
 
 #[derive(Deserialize)]

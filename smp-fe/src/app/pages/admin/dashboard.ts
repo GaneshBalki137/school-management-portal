@@ -5,6 +5,7 @@ import { ChartConfiguration } from 'chart.js';
 import { Api, Load } from '../../core/api';
 import { CHART_COLORS, ChartView } from '../../core/chart';
 import { attendanceTone, LOW_ATTENDANCE } from '../../core/format';
+import { Theme } from '../../core/ui';
 import { LoadState } from '../../core/widgets';
 
 interface Overview {
@@ -122,6 +123,7 @@ interface Overview {
 })
 export default class AdminDashboard {
   private api = inject(Api);
+  private theme = inject(Theme);
   protected readonly overview = new Load(() => this.api.get<Overview>('/admin/dashboard'));
   protected readonly attendanceTone = attendanceTone;
   protected readonly low = LOW_ATTENDANCE;
@@ -138,8 +140,8 @@ export default class AdminDashboard {
           {
             label: 'Attendance %',
             data: t.map((d) => d.percent),
-            borderColor: CHART_COLORS.primary,
-            backgroundColor: CHART_COLORS.primary + '22',
+            borderColor: this.theme.primary(),
+            backgroundColor: this.theme.primary() + '22',
             fill: true,
             tension: 0.35,
           },

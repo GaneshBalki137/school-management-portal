@@ -27,7 +27,7 @@ One place for a school's daily work: the office manages students, teachers, subj
 - Attendance per subject against the 75% requirement, plus full history.
 - Report card for each semester, ready to print.
 
-Everyone can change their password, switch light/dark theme and use the app on a phone.
+Everyone can change their password and use the app on a phone. Under My account each person picks light, dark or "match my device", and one of seven colour palettes; both are saved to their account and applied wherever they sign in.
 
 ## Security
 

@@ -3,6 +3,10 @@
 export type Role = 'admin' | 'teacher' | 'student';
 export type Status = 'P' | 'A' | 'L';
 export type Audience = 'all' | 'teacher' | 'student';
+export const THEME_MODES = ['system', 'light', 'dark'] as const;
+export type ThemeMode = (typeof THEME_MODES)[number];
+export const ACCENTS = ['indigo', 'ocean', 'teal', 'violet', 'berry', 'sunset', 'graphite'] as const;
+export type Accent = (typeof ACCENTS)[number];
 
 export interface Profile {
   account_id: number;
@@ -15,6 +19,8 @@ export interface Profile {
   teacher_id: number | null;
   class_id: number | null;
   details: Record<string, string | number | null> | null;
+  theme: ThemeMode;
+  accent: Accent;
 }
 
 export interface Person {
